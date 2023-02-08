@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+import os
+
+pcap= input("What is your pcap?")
+os.system("tshark -r" + pcap + " -T fields -e frame.number -e ip.src -e ip.dst -e tcp")
