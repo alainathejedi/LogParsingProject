@@ -1,0 +1,58 @@
+#!/usr/bin/python3
+from scapy.all import *
+from prettytable import PrettyTable
+from collections import Counter
+import pandas as pd 
+from tabulate import tabulate
+
+packets = rdpcap(input("What is your pcap file?"))
+
+srcIP=[]
+dstIP=[]
+srcdst=[]
+sport=[]
+dport=[]
+port=[]
+for pkt in packets:
+    if IP in pkt:
+        try:
+            srcIP.append(pkt[IP].src)
+            dstIP.append(pkt[IP].dst)
+            srcdst.append(pkt[IP].src + ","  + pkt[IP].dst)
+            dport.append((pkt[IP].dport))
+            sport.append((pkt[IP].sport))
+            port.append((pkt[IP].sport))
+            port.append((pkt[IP].dport))
+        except:
+            pass
+
+cnt = Counter()
+for IP in srcIP:
+    cnt[IP] += 1
+
+for IP in dstIP:
+    cnt[IP] += 1
+
+dcnt= Counter()
+for IP in dstIP:
+    dcnt[IP] += 1
+
+srcs = [*set(srcIP)]
+srctable = PrettyTable(["Src IP", "Count"])
+for ip, count in cnt.most_common():
+    srctable.add_row([ip, count])
+print(srctable)
+
+dsttable = PrettyTable(["Dst IP", "Count"])
+for ip, count in dcnt.most_common():
+    dsttable.add_row([ip, count])
+print(dsttable) 
+
+portcnt = Counter()
+for p in port:
+     portcnt[p] +=1
+
+srcandporttable=PrettyTable(["Src Ports", "Count"])
+for port, count in portcnt.most_common():
+    srcandporttable.add_row([port, count])
+print(srcandporttable)
