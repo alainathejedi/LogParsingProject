@@ -2,4 +2,5 @@
 import os
 
 pcap= input("What is your pcap?")
-os.system("tshark -r" + pcap + " -T fields -e frame.number -e ip.src -e ip.dst -e tcp")
+os.system("tshark -r " + pcap + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info > " + filename)
+os.system(head -n 30 " + filename)
