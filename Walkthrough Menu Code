@@ -52,7 +52,9 @@ while option != 0:
             print("[3] Src IP")
             print("[4] Dst IP")
             print("[5] Protocol")
-            print("[6] Other - Ports and Info")
+            print("[6] Src Ports")
+            print("[7] Dst Ports")
+            print("[8] Info"
             print("[9] Main Menu")
             print("__________________________________")
         
@@ -63,6 +65,7 @@ while option != 0:
             os.system("tshark -r " + reminder + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info -e _ws.col.Data> " + filename)
             def srcportmenu():
             print("----------------------------------")
+            print("This menu is for locating the source ports, as well as their frequencies. You are able to check different parts of the logs you choose based on the menu option.\n")
             print("[1] Check all Packets")
             print("[2] Check First 10 Packets")
             print("[3] Check First {insert} Packets")
