@@ -42,7 +42,6 @@ menu()
 option=int(input("What are you looking for / looking to do? Type just the number to select the option! "))
 
 while option != 0:
-    intro=input("Would you like to parse the file for a particular value? If yes type Y, otherwise type N ")
     if option == 1:
         parse1=input("\nExcellent! You've chosen to parse the file. Looking at the information above, what is it you're looking for? Field 1 (type Packet), Field 2 (type Time), Field 3 (type Src IP), Field 4 (type Dst IP), Field 5 (type Protocol), Field 6 (type Other). ")
     elif option == 2:
