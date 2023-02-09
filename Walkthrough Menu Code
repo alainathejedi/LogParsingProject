@@ -96,6 +96,11 @@ while option != 0:
                 srcportmenu()
                 srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
                 continue
+            while srcportoption == 4:
+                os.system("tail " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
+                srcportmenu()
+                srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                continue
             while srcportoption == 9:
                 menu()
                 option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
