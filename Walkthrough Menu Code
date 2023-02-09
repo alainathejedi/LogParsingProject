@@ -54,6 +54,7 @@ while option != 0:
             print("[5] Protocol")
             print("[6] Other - Ports and Info")
             print("[9] Main Menu")
+            print("__________________________________")
         
         parsemenu()
         parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
