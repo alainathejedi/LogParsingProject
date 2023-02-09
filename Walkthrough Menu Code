@@ -62,59 +62,59 @@ while option != 0:
             print("[5] Protocol")
             print("[6] Src Ports")
             print("[7] Dst Ports")
-            print("[8] Info"
+            print("[8] Info")
             print("[9] Main Menu")
             print("__________________________________")
-        
+
         parsemenu()
-        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
         if parseoption == 6:
             reminder=input("Remind me, what is your pcap?")
             os.system("tshark -r " + reminder + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info -e _ws.col.Data> " + filename)
             def srcportmenu():
-            print("----------------------------------")
-            print("This menu is for locating the source ports, as well as their frequencies. You are able to check different parts of the logs you choose based on the menu option.\n")
-            print("[1] Check all Packets")
-            print("[2] Check First 10 Packets")
-            print("[3] Check First {insert} Packets")
-            print("[4] Check Last 10 Packets")
-            print("[5] Check Last {insert} Packets")
-            print("[6] 
-            print("[9] Main Menu")
-            print("__________________________________")
+                print("----------------------------------")
+                print("This menu is for locating the source ports, as well as their frequencies. You are able to check different parts of the logs you choose based on the menu option.\n")
+                print("[1] Check all Packets")
+                print("[2] Check First 10 Packets")
+                print("[3] Check First {insert} Packets")
+                print("[4] Check Last 10 Packets")
+                print("[5] Check Last {insert} Packets")
+                print("[6] ")
+                print("[9] Main Menu")
+                print("__________________________________")
 
             srcportmenu()
-            srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?"))
+            srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
             if srcportoption == 1:
                 os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")           
             elif srcportoption == 2:
                 os.system("head " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
             elif srcportoption ==3:
-                headnum=input("How many of the first lines do you want to display (Ex: 50)? Enter your choice here: ")
-                os.system("head -n "+ headnum + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+                headnum=input("How many of the first lines do you want to display (Ex: 50)? Enter your choice here: \n")
+                os.system("head -n "+ headnum +' '+ filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
             elif srcportoption == 4:
                 os.system("tail " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr") 
             elif srcportoption == 5:
-                tailnum=input("How many of the last lines do you want to display (Ex: 50)? Enter your choice here: ")
-                os.system("tail -n "+ tailnum + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+                tailnum=input("How many of the last lines do you want to display (Ex: 50)? Enter your choice here: \n")
+                os.system("tail -n "+ tailnum +' '+ filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
             elif srcportoption == 9:
                 menu()
-                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
             else:
                 print(f'\nOops! Let us try, try again!')
                 parsemenu()
-                parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-                
+                parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+
         elif parseoption == 9:
             menu()
-            option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
         else:
             print(f'\nDid you mean something else? Let\'s try again!')
             parsemenu()
-            parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-  
-### 2nd OPT - FREQUENCY TABLES ###                
-  
+            parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+
+### 2nd OPT - FREQUENCY TABLES ###
+
     elif option == 2:
         cnt= Counter()
         for IP in srcIP:
@@ -146,10 +146,10 @@ while option != 0:
             srcandporttable.add_row([port, count])
         print(srcandporttable)
         menu()
-        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-                  
+        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+
 ### 3rd OPT - MOST COMMON ###
-                  
+
     elif option == 3:
         cnt1= Counter()
         for IP in srcIP:
@@ -174,7 +174,13 @@ while option != 0:
         for port, count in portcnt1.most_common():
             porttablemost.add_row([port, count])
         print(porttablemost[0])
-        print(f'Your most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}')
+        print(f'\nYour most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}\n')
         menu()
-        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+    else:
+        print(f'Oops! Perhaps it is a Monday, or just a mistake! Did you mean something else?')
+        menu()
+        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+
+        
 print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
