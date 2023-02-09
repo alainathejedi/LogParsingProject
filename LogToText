@@ -1,6 +1,19 @@
+### For the first 30 lines of the file ###
+
 #!/usr/bin/python3
 import os
 
 pcap= input("What is your pcap?")
 os.system("tshark -r " + pcap + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info > " + filename)
 os.system(head -n 30 " + filename)
+          
+### For finding SRC ports ###          
+          
+#!/usr/bin/python3
+import os
+
+pcap= input("What is your pcap?")
+filename = input("What do you want to name the new file + .txt?")
+os.system("tshark -r " + pcap + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info -e _ws.col.Data> " + filename)
+os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+
