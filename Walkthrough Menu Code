@@ -27,8 +27,8 @@ for pkt in pcap:
         except:
             pass
 
-packets=input("Remind me of the pcap again? I am just checking, because I'm insecure :) ")
-filename=input("What would you like to name the text file of the log? It should be FILENAME.txt")
+packets=input("Remind me of the pcap again? I am just checking, because I'm insecure (coding is fun, we make jokes :) ) ")
+filename=input("What would you like to name the text file of the log? It should be FILENAME.txt: ")
 os.system("tshark -r " + packets + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info > " + filename)
 os.system("head -n 30 " + filename)
 
@@ -46,7 +46,7 @@ option=int(input("\nWhat are you looking for / looking to do? Type just the numb
 while option != 0:
     if option == 1:
         def parsemenu():
-            print('----------------------------------")
+            print("----------------------------------")
             print("[1] Packet Numbers")
             print("[2] Time")
             print("[3] Src IP")
@@ -55,16 +55,22 @@ while option != 0:
             print("[6] Other - Ports and Info")
             print("[9] Main Menu")
         
-        parse1=input("\nExcellent! You've chosen to parse the file. Looking at the information above, what is it you're looking for? Field 1 (type Packet), Field 2 (type Time), Field 3 (type Src IP), Field 4 (type Dst IP), Field 5 (type Protocol), Field 6 (type Other). ")
         parsemenu()
         parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
         if parseoption == 5:
-            os.system("tshark -r " + pcap + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info -e _ws.col.Data> " + filename)
-            catopt=input("Would you like to view the whole file and the corresponding Src Ports? Type Y or N
+            reminder=input("Remind me, what is your pcap?")
+            os.system("tshark -r " + reminder + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info -e _ws.col.Data> " + filename)
+            catopt=input("Would you like to view the whole file and the corresponding Src Ports? Type Y or N ")
             if catopt == 'Y' or 'y':
                 os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
-            else:
-                headortail=input("Would you like to view the head or tail of the file and corresponding Src Ports? Type Head or Tail
+                sortedcat=input("Do you want to sort by highest frequency to the lowest? Type Y or N ")
+                if sortedcat == 'Y' or 'y':
+                    os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+                else:
+                    parsemenu()
+                    parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))            
+            elif catopt == 'N' or 'n':
+                headortail=input("Would you like to view the head or tail of the file and corresponding Src Ports? Type Head or Tail")
                 if headortail == 'Head' or 'head':
                     os.system("head " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
                     headmore=input("Do you want to see more than the first 10 lines, and corresponding Src Ports, in the file? If so, how many lines? Enter the number (Ex: 50). If not, enter N.") 
@@ -86,11 +92,16 @@ while option != 0:
                     else:
                         parsemenu()
                         parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            else:
+                print(f'\nOops! Let us try, try again!')
+                parsemenu()
+                parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+                
         elif parseoption == 9:
             menu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
         else:
-            print(f'Did you mean something else? Let\'s try again!")
+            print(f'\nDid you mean something else? Let\'s try again!')
             parsemenu()
             parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
     elif option == 2:
