@@ -39,7 +39,7 @@ def menu():
     print("[3] Most Common IP/Port")
     print("[0] Exit")
 menu()
-option=int(input("What are you looking for / looking to do? Type just the number to select the option! ")
+option=int(input("What are you looking for / looking to do? Type just the number to select the option! "))
 
 while option != 0:
     intro=input("Would you like to parse the file for a particular value? If yes type Y, otherwise type N ")
