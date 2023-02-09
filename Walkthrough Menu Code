@@ -40,12 +40,14 @@ os.system("head -n 30 " + filename)
 
 print(f'\n\n\nHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later. \n\n\n')
 def menu():
-    print("---------------------------------")
+    print("----------------------------------")
+    print("*** MAIN MENU ***")
+    print("----------------------------------")
     print("[1] Parse the File")
     print("[2] Frequency Tables")
     print("[3] Most Common IP/Port")
     print("[0] Exit")
-    print("_________________________________")
+    print("----------------------------------")
 menu()
 option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
 
@@ -55,6 +57,7 @@ while option != 0:
     if option == 1:
         def parsemenu():
             print("----------------------------------")
+            print("PARSE: What is it you're looking for in the pcap file? Note that the format of fields is:\n [Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
             print("[1] Packet Numbers")
             print("[2] Time")
             print("[3] Src IP")
@@ -64,14 +67,15 @@ while option != 0:
             print("[7] Dst Ports")
             print("[8] Info")
             print("[9] Main Menu")
-            print("__________________________________")
+            print("----------------------------------")
 
         parsemenu()
         parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
         if parseoption == 6:
             def srcportmenu():
                 print("----------------------------------")
-                print("This menu is for locating the source ports, as well as their frequencies. You are able to check different parts of the logs you choose based on the menu option.\n")
+                print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. You are able to check different parts of the logs you choose based on the menu option.\n")
+                print("----------------------------------")
                 print("[1] Check all Packets")
                 print("[2] Check First 10 Packets")
                 print("[3] Check First {insert} Packets")
@@ -80,7 +84,7 @@ while option != 0:
                 print("[6] ")
                 print("[9] Main Menu")
                 print("[0] Exit")
-                print("__________________________________")
+                print("----------------------------------")
            
             srcportmenu()
             srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
@@ -183,8 +187,10 @@ while option != 0:
         print(f'\nYour most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}\n')
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+    elif option == 0:
+        return
     else:
-        print(f'Oops! Perhaps it is a Monday, or just a mistake! Did you mean something else?')
+        print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
 
