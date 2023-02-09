@@ -41,7 +41,7 @@ if intro == 'Y':
 else:
     info1=input("\nRight-o. Are you looking to find the frequencies of IPs and Ports (type Frequencies)? Are you just wanting the most common IPs and Ports (type Most Common)?\n")
     if info1 == 'Frequencies':
-        cnt = Counter()
+        cnt= Counter()
         for IP in srcIP:
             cnt[IP] += 1
 
@@ -70,8 +70,30 @@ else:
         for port, count in portcnt.most_common():
             srcandporttable.add_row([port, count])
         print(srcandporttable)
-        if info1 == 'Most Common':
-            print(f'Your most frequent source and destination IP, as well as their frequency are Source:\n {srctable[0]} \n and Destination: \n{dsttable[0]}')
+    elif info1 == 'Most Common':
+        cnt1= Counter()
+        for IP in srcIP:
+            cnt1[IP] += 1
+        dcnt1= Counter()
+        for IP in dstIP:
+            dcnt1[IP] += 1
+
+        srcs = [*set(srcIP)]
+        srctablemost= PrettyTable(["Src IP", "Count"])
+        for ip, count in cnt1.most_common():
+            srctablemost.add_row([ip, count])
+
+        dsttablemost=PrettyTable(["Dst IP", "Count"])
+        for ip, count in dcnt1.most_common():
+            dsttablemost.add_row([ip, count])
+
+        portcnt1= Counter()
+        for port in sport:
+            portcnt1[port] +=1
+        porttablemost=PrettyTable(["Most Common Port", "Count"])
+        for port, count in portcnt1.most_common():
+            porttablemost.add_row([port, count])
+        print(porttablemost[0])
+        print(f'Your most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}')
     else:
         print(f'Error!')
-
