@@ -58,42 +58,37 @@ while option != 0:
         
         parsemenu()
         parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-        if parseoption == 5:
+        if parseoption == 6:
             reminder=input("Remind me, what is your pcap?")
             os.system("tshark -r " + reminder + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info -e _ws.col.Data> " + filename)
-            catopt=input("Would you like to view the whole file and the corresponding Src Ports? Yes (type 1) or No (type 2)? ")
-            if catopt == 1:
-                os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
-                    sortedcat=input("Do you want to sort by highest frequency to the lowest? Yes (type 1) or No (type 2)? ")
-                    if sortedcat == 1:
-                        os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
-                    else:
-                        print(f'Cool! Let us return')
-                        parsemenu()
-                        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))            
-            elif catopt == 2:
-                headortail=input("Would you like to view the head or tail of the file and corresponding Src Ports? Type Head or Tail")
-                if headortail == 'Head' or 'head':
-                    os.system("head " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
-                    headmore=input("Do you want to see more than the first 10 lines, and corresponding Src Ports, in the file? If so, how many lines? Enter the number (Ex: 50). If not, enter N.") 
-                    if headmore == [0-9]:
-                        os.system("head "+ headmore + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
-                        parsemenu()
-                        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-                    else:
-                        parsemenu()
-                        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))             
+            def srcportmenu():
+            print("----------------------------------")
+            print("[1] Check all Packets")
+            print("[2] Check First 10 Packets")
+            print("[3] Check First {insert} Packets")
+            print("[4] Check Last 10 Packets")
+            print("[5] Check Last {insert} Packets")
+            print("[6] 
+            print("[9] Main Menu")
+            print("__________________________________")
 
-                else:
-                    os.system("tail " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
-                    tailmore=input("Do you want to see more than the last 10 lines, and corresponding Src Ports, in the file? If so, how many lines? Enter the number (Ex: 50) If not, enter N") 
-                    if tailmore == [0-9]:
-                        os.system("tail "+ tailmore + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
-                        parsemenu()
-                        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-                    else:
-                        parsemenu()
-                        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            srcportmenu()
+            srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?"))
+            if srcportoption == 1:
+                os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")           
+            elif srcportoption == 2:
+                os.system("head " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+            elif srcportoption ==3:
+                headnum=input("How many of the first lines do you want to display (Ex: 50)? Enter your choice here: ")
+                os.system("head -n "+ headnum + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+            elif srcportoption == 4:
+                os.system("tail " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr") 
+            elif srcportoption == 5:
+                tailnum=input("How many of the last lines do you want to display (Ex: 50)? Enter your choice here: ")
+                os.system("tail -n "+ tailnum + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+            elif srcportoption == 9:
+                menu()
+                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
             else:
                 print(f'\nOops! Let us try, try again!')
                 parsemenu()
