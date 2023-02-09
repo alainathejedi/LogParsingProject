@@ -4,7 +4,9 @@ from scapy.all import *
 from prettytable import PrettyTable
 from collections import Counter
 
-##Defining the variables, mostly used later in the code.
+##Defining the variables, mostly used later in the code. ###
+
+
 pcap=rdpcap(input("What is your pcap? "))
 
 
@@ -32,6 +34,10 @@ filename=input("What would you like to name the text file of the log? It should 
 os.system("tshark -r " + packets + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info > " + filename)
 os.system("head -n 30 " + filename)
 
+###                                                                         ###
+### Introduction. Can explain about the Project, and also the MAIN MENU DEF ###
+###                                                                         ###
+
 print(f'\n\n\nHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later. \n\n\n')
 def menu():
     print("---------------------------------")
@@ -42,6 +48,8 @@ def menu():
     print("_________________________________")
 menu()
 option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+
+### 1st OPT - PARSE ###
 
 while option != 0:
     if option == 1:
@@ -104,6 +112,9 @@ while option != 0:
             print(f'\nDid you mean something else? Let\'s try again!')
             parsemenu()
             parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+  
+### 2nd OPT - FREQUENCY TABLES ###                
+  
     elif option == 2:
         cnt= Counter()
         for IP in srcIP:
@@ -136,6 +147,9 @@ while option != 0:
         print(srcandporttable)
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+                  
+### 3rd OPT - MOST COMMON ###
+                  
     elif option == 3:
         cnt1= Counter()
         for IP in srcIP:
