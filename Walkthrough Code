@@ -1,0 +1,16 @@
+#!/usr/bin/python3
+import os
+
+pcap= input("What is your pcap?")
+filename=input("What would you like to name the text file of the log? It should be FILENAME.txt")
+os.system("tshark -r " + pcap + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info > " + filename)
+os.system("head -n 30 " + filename)
+
+print(f'\n\n\nHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need.\n\n\n')
+
+
+intro=input("Would you like to parse the file for a particular value? If yes type Y, otherwise type N\n\n")
+if intro == 'Y':
+    parse1=input("Excellent! You've chosen to parse the file. Looking at the information above, what is it you're looking for? Field 1 (type Packet), Field 2 (type Time), Field 3 (type Src IP), Field 4 (type Dst IP), Field 5 (type Protocol), Field 6 (type Other).\n\n")
+else:
+    info1=input("Right-o. Are you looking to find the frequencies of IPs and Ports (type Frequencies)? Are you just wanting the most common IPs and Ports (type Most Common)?\n\n")
