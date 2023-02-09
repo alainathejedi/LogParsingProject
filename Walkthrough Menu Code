@@ -89,7 +89,8 @@ while option != 0:
                 srcportmenu()
                 srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
             elif srcportoption ==2:
-                os.system("head -n 10  " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > headfile.txt | cat headfile.txt")
+                ### os.system("head -n 10  " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > headfile.txt | cat headfile.txt")
+                os.system("head " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
                 srcportmenu()
                 srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
             elif srcportoption == 9:
