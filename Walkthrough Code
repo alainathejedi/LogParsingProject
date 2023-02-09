@@ -76,29 +76,37 @@ while option != 0:
         for port, count in portcnt.most_common():
             srcandporttable.add_row([port, count])
         print(srcandporttable)
-    elif option == 4:
-        cnt1= Counter()
-        for IP in srcIP:
-            cnt1[IP] += 1
-        dcnt1= Counter()
-        for IP in dstIP:
-            dcnt1[IP] += 1
+        break
+menu()
+option=int(input("What are you looking for / looking to do? Type just the number to select the option! "))
+while option != 0:     
+    if option == 4:
+    cnt1= Counter()
+    for IP in srcIP:
+        cnt1[IP] += 1
+    dcnt1= Counter()
+    for IP in dstIP:
+        dcnt1[IP] += 1
 
-        srcs = [*set(srcIP)]
-        srctablemost= PrettyTable(["Src IP", "Count"])
-        for ip, count in cnt1.most_common():
-            srctablemost.add_row([ip, count])
+    srcs = [*set(srcIP)]
+    srctablemost= PrettyTable(["Src IP", "Count"])
+    for ip, count in cnt1.most_common():
+        srctablemost.add_row([ip, count])
 
-        dsttablemost=PrettyTable(["Dst IP", "Count"])
-        for ip, count in dcnt1.most_common():
-            dsttablemost.add_row([ip, count])
+    dsttablemost=PrettyTable(["Dst IP", "Count"])
+    for ip, count in dcnt1.most_common():
+        dsttablemost.add_row([ip, count])
 
-        portcnt1= Counter()
-        for port in sport:
-            portcnt1[port] +=1
-        porttablemost=PrettyTable(["Most Common Port", "Count"])
-        for port, count in portcnt1.most_common():
-            porttablemost.add_row([port, count])
-        print(porttablemost[0])
-        print(f'Your most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}')
-print(f'Alrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+    portcnt1= Counter()
+    for port in sport:
+        portcnt1[port] +=1
+    porttablemost=PrettyTable(["Most Common Port", "Count"])
+    for port, count in portcnt1.most_common():
+        porttablemost.add_row([port, count])
+    print(porttablemost[0])
+    print(f'Your most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}')
+menu()
+option=int(input("What are you looking for / looking to do? Type just the number to select the option! "))
+while option != 0: 
+    if option == 0:
+        print(f'Alrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
