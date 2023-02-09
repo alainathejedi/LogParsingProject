@@ -79,25 +79,29 @@ while option != 0:
                 print("[5] Check Last {insert} Packets")
                 print("[6] ")
                 print("[9] Main Menu")
+                print("[0] Exit")
                 print("__________________________________")
-
+           
             srcportmenu()
             srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            if srcportoption == 1:
-                os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr") 
-                srcportmenu()
-                srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            elif srcportoption ==2:
-                os.system("head -n 10  " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
-                srcportmenu()
-                srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            elif srcportoption == 9:
-                menu()
-                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-            else:
-                print(f'\nOops! Let us try, try again!')
-                srcportmenu()
-                srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+            while srcportoption != 0:
+                if srcportoption == 1:
+                    os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr") 
+                    srcportmenu()
+                    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                elif srcportoption ==2:
+                    os.system("head -n 10  " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+                    srcportmenu()
+                    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                elif srcportoption == 9:
+                    menu()
+                    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+                elif srcportoption == 0:
+                    break
+                else:
+                    print(f'\nOops! Let us try, try again!')
+                    srcportmenu()
+                    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
 
         elif parseoption == 9:
             menu()
