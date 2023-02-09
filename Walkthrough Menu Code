@@ -84,25 +84,27 @@ while option != 0:
            
             srcportmenu()
             srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            if srcportoption == 1:
+            while srcportoption == 1:
                 ### os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > wholefile.txt | cat wholefile.txt") 
                 os.system("cat " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > catfile.txt && cat catfile.txt")
                 srcportmenu()
                 srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            elif srcportoption ==2:
+                continue 
+            while srcportoption ==2:
                 ### os.system("head -n 10  " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > headfile.txt | cat headfile.txt")
                 os.system("head " + filename + " | cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
                 srcportmenu()
                 srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            elif srcportoption == 9:
+                continue
+            while srcportoption == 9:
                 menu()
                 option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-            elif srcportoption == 0:
-                break
-            else:
+                continue
+            while srcportoption != 0:
                 print(f'\nOops! Let us try, try again!')
                 srcportmenu()
                 srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                continue
 
         elif parseoption == 9:
             menu()
