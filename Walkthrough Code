@@ -1,5 +1,29 @@
 #!/usr/bin/python3
 import os
+from scapy.all import *
+from prettytable import PrettyTable
+from collections import Counter
+
+##Defining the variables, mostly used later in the code.
+
+srcIP=[]
+dstIP=[]
+srcdst=[]
+sport=[]
+dport=[]
+port=[]
+for pkt in packets:
+    if IP in pkt:
+        try:
+            srcIP.append(pkt[IP].src)
+            dstIP.append(pkt[IP].dst)
+            srcdst.append(pkt[IP].src + ","  + pkt[IP].dst)
+            dport.append((pkt[IP].dport))
+            sport.append((pkt[IP].sport))
+            port.append((pkt[IP].sport))
+            port.append((pkt[IP].dport))
+        except:
+            pass
 
 pcap= input("What is your pcap?")
 filename=input("What would you like to name the text file of the log? It should be FILENAME.txt")
@@ -9,8 +33,47 @@ os.system("head -n 30 " + filename)
 print(f'\n\n\nHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need.\n\n\n')
 
 
-intro=input("Would you like to parse the file for a particular value? If yes type Y, otherwise type N\n\n")
+intro=input("Would you like to parse the file for a particular value? If yes type Y, otherwise type N")
 if intro == 'Y':
-    parse1=input("Excellent! You've chosen to parse the file. Looking at the information above, what is it you're looking for? Field 1 (type Packet), Field 2 (type Time), Field 3 (type Src IP), Field 4 (type Dst IP), Field 5 (type Protocol), Field 6 (type Other).\n\n")
+    parse1=input("\nExcellent! You've chosen to parse the file. Looking at the information above, what is it you're looking for? Field 1 (type Packet), Field 2 (type Time), Field 3 (type Src IP), Field 4 (type Dst IP), Field 5 (type Protocol), Field 6 (type Other).\n")
 else:
-    info1=input("Right-o. Are you looking to find the frequencies of IPs and Ports (type Frequencies)? Are you just wanting the most common IPs and Ports (type Most Common)?\n\n")
+    info1=input("\nRight-o. Are you looking to find the frequencies of IPs and Ports (type Frequencies)? Are you just wanting the most common IPs and Ports (type Most Common)?\n")
+    if info1 == 'Frequencies'
+        cnt = Counter()
+        for IP in srcIP:
+            cnt[IP] += 1
+
+        for IP in dstIP:
+            cnt[IP] += 1
+
+        dcnt= Counter()
+            for IP in dstIP:
+            dcnt[IP] += 1
+
+        srcs = [*set(srcIP)]
+        srctable = PrettyTable(["Src IP", "Count"])
+        for ip, count in cnt.most_common():
+            srctable.add_row([ip, count])
+        print(srctable)
+
+        dsttable = PrettyTable(["Dst IP", "Count"])
+        for ip, count in dcnt.most_common():
+            dsttable.add_row([ip, count])
+        print(dsttable)
+
+        portcnt = Counter()
+        for port in sport:
+            portcnt[port] +=1
+        srcandporttable=PrettyTable(["Ports", "Count"])
+        for port, count in portcnt.most_common():
+            srcandporttable.add_row([port, count])
+        print(srcandporttable)
+    elif info1 == 'Most Common':
+        print(f'Your most frequent source and destination IP, as well as their frequency are Source:\n {srctable[0]} \n and Destination: \n{dsttable[0]}')
+    else:
+        print(f'Error!')
+
+    
+    
+    
+    
