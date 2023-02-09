@@ -45,8 +45,6 @@ while option != 0:
     if option == 1:
         parse1=input("\nExcellent! You've chosen to parse the file. Looking at the information above, what is it you're looking for? Field 1 (type Packet), Field 2 (type Time), Field 3 (type Src IP), Field 4 (type Dst IP), Field 5 (type Protocol), Field 6 (type Other). ")
     elif option == 2:
-        info1=input("\nRight-o. Are you looking to find the frequencies of IPs and Ports (type Frequencies)? Are you just wanting the most common IPs and Ports (type Most Common)? ")
-    elif option == 3:
         cnt= Counter()
         for IP in srcIP:
             cnt[IP] += 1
@@ -80,7 +78,7 @@ while option != 0:
 menu()
 option=int(input("What are you looking for / looking to do? Type just the number to select the option! "))
 while option != 0:     
-    if option == 4:
+    if option == 3:
     cnt1= Counter()
     for IP in srcIP:
         cnt1[IP] += 1
