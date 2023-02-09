@@ -60,16 +60,17 @@ while option != 0:
         if parseoption == 5:
             reminder=input("Remind me, what is your pcap?")
             os.system("tshark -r " + reminder + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info -e _ws.col.Data> " + filename)
-            catopt=input("Would you like to view the whole file and the corresponding Src Ports? Type Y or N ")
-            if catopt == 'Y' or 'y':
+            catopt=input("Would you like to view the whole file and the corresponding Src Ports? Yes (type 1) or No (type 2)? ")
+            if catopt == 1:
                 os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
-                sortedcat=input("Do you want to sort by highest frequency to the lowest? Type Y or N ")
-                if sortedcat == 'Y' or 'y':
-                    os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
-                else:
-                    parsemenu()
-                    parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))            
-            elif catopt == 'N' or 'n':
+                    sortedcat=input("Do you want to sort by highest frequency to the lowest? Yes (type 1) or No (type 2)? ")
+                    if sortedcat == 1:
+                        os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr")
+                    else:
+                        print(f'Cool! Let us return')
+                        parsemenu()
+                        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))            
+            elif catopt == 2:
                 headortail=input("Would you like to view the head or tail of the file and corresponding Src Ports? Type Head or Tail")
                 if headortail == 'Head' or 'head':
                     os.system("head " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c")
