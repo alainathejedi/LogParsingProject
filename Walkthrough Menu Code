@@ -58,6 +58,7 @@ while option != 0:
         def parsemenu():
             print("----------------------------------")
             print("PARSE: What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
+            print("----------------------------------")
             print("[1] Packet Numbers")
             print("[2] Time")
             print("[3] IPs (Src and Dst)")
