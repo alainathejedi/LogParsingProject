@@ -135,8 +135,7 @@ while option != 0:
             sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
             while sdipoption != 0:
                 if sdipoption == 1:
-                    os.system("cat " + filename + " | awk '{print $3 \" < SRC  | DST > \"  $4}'")
-
+                    os.system("cat " + filename + " | awk '{print\" | \" $3 \" < SRC  |  DST > \"  $4 \" | \"}' | sort | uniq -c | sort -nr")
                     sdipmenu()
                     sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
                     continue
