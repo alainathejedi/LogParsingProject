@@ -57,7 +57,7 @@ while option != 0:
     if option == 1:
         def parsemenu():
             print("----------------------------------")
-            print("PARSE: What is it you're looking for in the pcap file? Note that the format of fields is:\n [Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
+            print("PARSE: What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
             print("[1] Packet Numbers")
             print("[2] Time")
             print("[3] IPs (Src and Dst)")
@@ -73,7 +73,7 @@ while option != 0:
         if parseoption == 5:
             def srcportmenu():
                 print("----------------------------------")
-                print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. You are able to check different parts of the logs you choose based on the menu option.\n")
+                print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
                 print("----------------------------------")
                 print("[1] Check all Packets")
                 print("[2] Check First 10 Packets")
@@ -117,7 +117,7 @@ while option != 0:
         if parseoption == 3:
             def sdipmenu():
                 print("----------------------------------")
-                print("IP MENU: \nHere, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:")
+                print("IP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:")
                 print("----------------------------------")
                 print("[1] Check Conversations (Src and Dst")
                 print("[2] Check All Packets - Src IP")
