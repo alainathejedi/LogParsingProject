@@ -57,7 +57,8 @@ while option != 0:
     if option == 1:
         def parsemenu():
             print("----------------------------------")
-            print("PARSE: What is it you're looking for in the pcap file? Note that the format of fields is:\n [Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
+            print("PARSING LOGS MENU: \nWhat is it you're looking for in the pcap file? Note that the format of fields is:\n [Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
+            print("----------------------------------")
             print("[1] Packet Numbers")
             print("[2] Time")
             print("[3] Src IP")
@@ -74,7 +75,7 @@ while option != 0:
         if parseoption == 6:
             def srcportmenu():
                 print("----------------------------------")
-                print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. You are able to check different parts of the logs you choose based on the menu option.\n")
+                print("SRC PORTS MENU: \nThis menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
                 print("----------------------------------")
                 print("[1] Check all Packets")
                 print("[2] Check First 10 Packets")
