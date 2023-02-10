@@ -76,9 +76,9 @@ while option != 0:
                 print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
                 print("----------------------------------")
                 print("[1] Check all Packets")
-                print("[2] Check First 10 Packets")
+                print("[2] Check First 20 Packets")
                 print("[3] Check First {insert} Packets")
-                print("[4] Check Last 10 Packets")
+                print("[4] Check Last 20 Packets")
                 print("[5] Check Last {insert} Packets")
                 print("[6] ")
                 print("[9] Main Menu")
@@ -95,13 +95,13 @@ while option != 0:
                     srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
                     continue 
                 elif srcportoption ==2:
-                    ### os.system("head " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}'' | sort | uniq -c | sort -nr > headfile.txt | cat headfile.txt")
-                    os.system("head " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' print $1}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
+                    ### os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}'' | sort | uniq -c | sort -nr > headfile.txt | cat headfile.txt")
+                    os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
                     srcportmenu()
                     srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
                     continue
                 elif srcportoption == 4:
-                    os.system("tail " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}'| sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
+                    os.system("tail -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
                     srcportmenu()
                     srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
                     continue
