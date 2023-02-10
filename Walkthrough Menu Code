@@ -88,7 +88,6 @@ while option != 0:
            
             srcportmenu()
             srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            
             while srcportoption != 0:
                 if srcportoption == 1:
                     ### os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > wholefile.txt | cat wholefile.txt") 
@@ -116,14 +115,15 @@ while option != 0:
                     srcportmenu()
                     srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
                     continue
-
         elif parseoption == 9:
             menu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+            
         else:
             print(f'\nDid you mean something else? Let\'s try again!')
             parsemenu()
             parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+            
 
 ### 2nd OPT - FREQUENCY TABLES ###
 
@@ -159,7 +159,7 @@ while option != 0:
         print(srcandporttable)
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-
+        
 ### 3rd OPT - MOST COMMON ###
 
     elif option == 3:
@@ -189,12 +189,9 @@ while option != 0:
         print(f'\nYour most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}\n')
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-    elif option == 0:
-        return
     else:
         print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-
         
 print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
