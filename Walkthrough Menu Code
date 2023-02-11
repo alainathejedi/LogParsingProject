@@ -69,6 +69,8 @@ while option != 0:
             print("[9] Main Menu")
             print("----------------------------------")
 
+### START OF PARSING MENU ###
+            
         parsemenu()
         parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
         if parseoption == 5:
@@ -85,7 +87,9 @@ while option != 0:
                 print("[9] Main Menu")
                 print("[0] Exit")
                 print("----------------------------------")
-           
+        
+        ### SRC PORT PARSING MENU ###
+        
             srcportmenu()
             srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
             while srcportoption != 0:
@@ -135,8 +139,7 @@ while option != 0:
             sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
       
     
-    ### IP Parsing menu - Both SRC and DST ###
-    
+        ### IP PARSING MENU - Both SRC and DST ###
     
             while sdipoption != 0:
                 if sdipoption == 1:
