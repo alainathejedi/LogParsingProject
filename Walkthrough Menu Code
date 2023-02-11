@@ -133,13 +133,56 @@ while option != 0:
 
             sdipmenu()
             sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+      
+    
+    ### IP Parsing menu - Both SRC and DST ###
+    
+    
             while sdipoption != 0:
                 if sdipoption == 1:
-                    os.system("cat " + filename + " | awk '{print\" | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 " is the protocol"}' | sort | uniq -c | sort -nr")
+                    os.system("cat " + filename + " | awk '{print\" | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol\"}' | sort | uniq -c | sort -nr")
                     sdipmenu()
                     sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
                     continue
-
+                elif sdipoption ==2:
+                    os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+                    sdipmenu()
+                    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+                    continue
+                elif sdipoption ==3:
+                    os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+                    sdipmenu()
+                    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+                    continue
+                elif sdipoption ==4:
+                    os.system("head " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+                    sdipmenu()
+                    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+                    continue
+                elif sdipoption ==5:
+                    os.system("head " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+                    sdipmenu()
+                    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+                    continue
+                elif sdipoption ==6:
+                    os.system("tail " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+                    sdipmenu()
+                    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+                    continue
+                elif sdipoption ==7:
+                    os.system("tail " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+                    sdipmenu()
+                    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+                    continue
+                elif sdipoption ==9:
+                    menu()
+                    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+                    continue
+                else:
+                    print(f'Oops! Let\'s try that again, shall we?')
+                    sdipmenu()
+                    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+                    continue
         elif parseoption == 9:
             menu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
