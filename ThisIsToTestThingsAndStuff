@@ -185,8 +185,6 @@ def menu():
                     else:
                         print(f'\nErmahgerd! Let us try, try again!')
 
-
-
             ### DST PORT MENU ###
 
 
