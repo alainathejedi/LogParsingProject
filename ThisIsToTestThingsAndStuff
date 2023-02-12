@@ -71,8 +71,54 @@ while option != 0:
             
         parsemenu()
         parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-        if parseoption == 5:
-            def srcportmenu():
+        
+        
+        
+        
+        
+        if parseoption ==1:
+            def sdip1():
+                os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol\"}' | sort -n")
+            def sdip2():
+                os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+            def sdip3():
+                os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+            def sdip4():
+                os.system("head " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+            def sdip5():
+                os.system("head " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+            def sdip6():
+                os.system("tail " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+            def sdip7():
+                os.system("tail " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+            def sdip9():
+                menu()
+                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            def sdipexit():
+                print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                os._exit(0)
+                
+                
+        
+        
+        ### SRC PORT PARSING MENU ###
+        
+        
+        
+        elif parseoption == 5:
+            def srcport1():
+                os.system("cat " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile.txt && cat catfile.txt")
+            def srcport2():
+                os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
+            def srcport4():
+                os.system("tail -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
+            def srcport9():
+                menu()
+                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            def srcportexit():
+                print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                os._exit(0)
+            while true:
                 print("----------------------------------")
                 print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
                 print("----------------------------------")
@@ -85,43 +131,42 @@ while option != 0:
                 print("[9] Main Menu")
                 print("[0] Exit")
                 print("----------------------------------")
-        
-        ### SRC PORT PARSING MENU ###
-        
-            srcportmenu()
-            srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            while srcportoption != 0:
-                while srcportoption == 1:
-                    ### os.system("cat " + filename + "| cut -f 6 | awk '{if ($1 ~ /^[0-9]+$/) print $1}' | sort | uniq -c | sort -nr > wholefile.txt | cat wholefile.txt") 
-                    os.system("cat " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile.txt && cat catfile.txt")
-                    srcportmenu()
-                    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-                    break
-                while srcportoption ==2:
-                    ### os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}'' | sort | uniq -c | sort -nr > headfile.txt | cat headfile.txt")
-                    os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
-                    srcportmenu()
-                    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-                    break
-                while srcportoption == 4:
-                    os.system("tail -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
-                    srcportmenu()
-                    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-                    break
-                elif srcportoption == 9:
-                    menu()
-                    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-                    break
-                else:
-                    print(f'\nOops! Let us try, try again!')
-                    srcportmenu()
-                    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
                           
-               
-        parsemenu()
-        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-        if parseoption == 6:
-            def dstportmenu():
+                srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                
+                if srcportoption ==1:
+                    srcport1()
+                elif srcportoption ==2:
+                    srcport2()
+                elif srcportoption ==4:
+                    srcport4()
+                elif srcportoption ==9:
+                    srcport9()
+                elif srcportoption ==0:
+                    srcportexit()
+                else:
+                    print(f'\nErmahgerd! Let us try, try again!')
+        
+        
+        
+        ### DST PORT MENU ###
+        
+ 
+         elif parseoption == 6:
+            def dstport1():
+                os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
+            def dstport2():     
+                os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
+            def dstport4():
+                os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
+            def dstport9():
+                menu()
+                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            def dstportexit():
+                print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                os._exit(0)  
+            
+            while True:
                 print("----------------------------------")
                 print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
                 print("----------------------------------")
@@ -135,34 +180,23 @@ while option != 0:
                 print("[0] Exit")
                 print("----------------------------------")
                 
-            dstportmenu()
-            dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-            while dstportoption != 0:
-                while dstportoption == 1:
-                    ### os.system("cat " + filename + "| cut -f 6 | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > wholefile.txt | cat wholefile.txt") 
-                    os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
-                    dstportmenu()
-                    dstportoption=int(input("\nTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-                    break
-                while dstportoption ==2:
-                    os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
-                    dstportmenu()
-                    dstportoption=int(input("\nTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-                    break
-                while dstportoption ==4:
-                    os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
-                    dstportmenu()
-                    dstportoption=int(input("\nTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-                    break
-                while dstportoption ==9:
-                    menu()
-                    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-                    break
+                dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                
+                if dstportoption ==1:
+                    dstport1()
+                elif dstportoption ==2:
+                    dstport2()
+                elif dstportoption ==4:
+                    dstport4()
+                elif dstportoption ==9:
+                    dstport9()
+                elif dstportoption ==0:
+                    dstportexit()
                 else:
-                    print(f'\nOops! Let us try, try again!')
-                    dstportmenu()
-                    dstportoption=int(input("\nTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-                   
+                    print(f'\nOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.')
+            
+ #########       
+  
         if parseoption == 1:
             def sdipmenu():
                 print("----------------------------------")
