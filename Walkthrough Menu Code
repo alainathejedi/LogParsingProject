@@ -319,7 +319,7 @@ def option1():
         print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
         os._exit(0)
     else:
-        print(f'\nDid you mean something else? Let\'s try again!')
+        print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
         option1()
 
 
@@ -393,9 +393,7 @@ def option3():
 def exit():
     print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
     os._exit(0)
-    
-print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
-mainmenu()
+   
 
     
 mainmenu()
