@@ -52,194 +52,194 @@ def menu():
         print("----------------------------------")
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-    menu()
-    
+menu()
+
 ### MAIN MENU 1 - PARSE ###
 
-    if option ==1:
-        def parse():
-            while True:
-                print("----------------------------------")
-                print("PARSE: What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
-                print("----------------------------------")
-                print("[1] Conversations and IPs")
-                print("[2] Src IP")
-                print("[3] Dst IP")
-                print("[4] Protocols")
-                print("[5] Src Ports")
-                print("[6] Dst Ports")
-                print("[7] Info")
-                print("[9] Main Menu")
-                print("----------------------------------")
+if option ==1:
+    def parse():
+        while True:
+            print("----------------------------------")
+            print("PARSE: What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
+            print("----------------------------------")
+            print("[1] Conversations and IPs")
+            print("[2] Src IP")
+            print("[3] Dst IP")
+            print("[4] Protocols")
+            print("[5] Src Ports")
+            print("[6] Dst Ports")
+            print("[7] Info")
+            print("[9] Main Menu")
+            print("----------------------------------")
 
 
-                parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+            parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
 
 
-            ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
+        ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
 
-            if parseoption ==1:
-                def sdip1():
-                    os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol\"}' | sort -n")
-                def sdip2():
-                    os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-                def sdip3():
-                    os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-                def sdip4():
-                    os.system("head " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-                def sdip5():
-                    os.system("head " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-                def sdip6():
-                    os.system("tail " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-                def sdip7():
-                    os.system("tail " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-                def sdip9():
-                    menu()
-                    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-                def sdipexit():
-                    print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
-                    os._exit(0)
-                while True:
-                    print("----------------------------------")
-                    print("IP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:")
-                    print("----------------------------------")
-                    print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
-                    print("[2] Check All Packets - Src IP")
-                    print("[3] Check All Packets - Dst IP")
-                    print("[4] Check First 10 Packets - Src IP")
-                    print("[5] Check First 10 Packets - Dst IP")
-                    print("[6] Check Last 10 Packets - Src IP")
-                    print("[7] Check Last 10 Packets - Dst IP")
-                    print("[9] Main Menu")
-                    print("[0] Exit")
-                    print("----------------------------------")
-
-                    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
-
-                    if sdipoption == 1:
-                        sdip1()
-                    elif sdipoption ==2:
-                        sdip2()
-                    elif sdipoption ==3:
-                        sdip3()
-                    elif sdipoption ==4:
-                        sdip4()
-                    elif sdipoption ==5:
-                        sdip5()
-                    elif sdipoption ==6:
-                        sdip6()
-                    elif sdipoption ==7:
-                        sdip7()
-                    elif sdiption ==9:
-                        sdip9()
-                    elif sdipoption ==0:
-                        sdipexit()
-                    else:
-                        print(f'\nNever fear, we can have another try! Choose wisely...')
-
-
-
-            ### SRC PORT PARSING MENU ###
-
-
-
-            elif parseoption == 5:
-                def srcport1():
-                    os.system("cat " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile.txt && cat catfile.txt")
-                def srcport2():
-                    os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
-                def srcport4():
-                    os.system("tail -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
-                def srcport9():
-                    menu()
-                    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-                def srcportexit():
-                    print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
-                    os._exit(0)
-                while true:
-                    print("----------------------------------")
-                    print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-                    print("----------------------------------")
-                    print("[1] Check all Packets")
-                    print("[2] Check First 20 Packets")
-                    print("[3] Check First {insert} Packets")
-                    print("[4] Check Last 20 Packets")
-                    print("[5] Check Last {insert} Packets")
-                    print("[6] ")
-                    print("[9] Main Menu")
-                    print("[0] Exit")
-                    print("----------------------------------")
-
-                    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-
-                    if srcportoption ==1:
-                        srcport1()
-                    elif srcportoption ==2:
-                        srcport2()
-                    elif srcportoption ==4:
-                        srcport4()
-                    elif srcportoption ==9:
-                        srcport9()
-                    elif srcportoption ==0:
-                        srcportexit()
-                    else:
-                        print(f'\nErmahgerd! Let us try, try again!')
-
-            ### DST PORT MENU ###
-
-
-            elif parseoption == 6:
-                def dstport1():
-                    os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
-                def dstport2():     
-                    os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
-                def dstport4():
-                    os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
-                def dstport9():
-                    menu()
-                    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-                def dstportexit():
-                    print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
-                    os._exit(0)  
-
-                while True:
-                    print("----------------------------------")
-                    print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-                    print("----------------------------------")
-                    print("[1] Check all Packets")
-                    print("[2] Check First 20 Packets")
-                    print("[3] Check First {insert} Packets")
-                    print("[4] Check Last 20 Packets")
-                    print("[5] Check Last {insert} Packets")
-                    print("[6] ")
-                    print("[9] Main Menu")
-                    print("[0] Exit")
-                    print("----------------------------------")
-
-                    dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-
-                    if dstportoption ==1:
-                        dstport1()
-                    elif dstportoption ==2:
-                        dstport2()
-                    elif dstportoption ==4:
-                        dstport4()
-                    elif dstportoption ==9:
-                        dstport9()
-                    elif dstportoption ==0:
-                        dstportexit()
-                    else:
-                        print(f'\nOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.')
-
-
-            elif parseoption == 9:
+        if parseoption ==1:
+            def sdip1():
+                os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol\"}' | sort -n")
+            def sdip2():
+                os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+            def sdip3():
+                os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+            def sdip4():
+                os.system("head " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+            def sdip5():
+                os.system("head " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+            def sdip6():
+                os.system("tail " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+            def sdip7():
+                os.system("tail " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+            def sdip9():
                 menu()
-                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-            elif parseoption ==0:
+                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            def sdipexit():
                 print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
                 os._exit(0)
-            else:
-                print(f'\nDid you mean something else? Let\'s try again!')
+            while True:
+                print("----------------------------------")
+                print("IP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:")
+                print("----------------------------------")
+                print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
+                print("[2] Check All Packets - Src IP")
+                print("[3] Check All Packets - Dst IP")
+                print("[4] Check First 10 Packets - Src IP")
+                print("[5] Check First 10 Packets - Dst IP")
+                print("[6] Check Last 10 Packets - Src IP")
+                print("[7] Check Last 10 Packets - Dst IP")
+                print("[9] Main Menu")
+                print("[0] Exit")
+                print("----------------------------------")
+
+                sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+
+                if sdipoption == 1:
+                    sdip1()
+                elif sdipoption ==2:
+                    sdip2()
+                elif sdipoption ==3:
+                    sdip3()
+                elif sdipoption ==4:
+                    sdip4()
+                elif sdipoption ==5:
+                    sdip5()
+                elif sdipoption ==6:
+                    sdip6()
+                elif sdipoption ==7:
+                    sdip7()
+                elif sdiption ==9:
+                    sdip9()
+                elif sdipoption ==0:
+                    sdipexit()
+                else:
+                    print(f'\nNever fear, we can have another try! Choose wisely...')
+
+
+
+        ### SRC PORT PARSING MENU ###
+
+
+
+        elif parseoption == 5:
+            def srcport1():
+                os.system("cat " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile.txt && cat catfile.txt")
+            def srcport2():
+                os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
+            def srcport4():
+                os.system("tail -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
+            def srcport9():
+                menu()
+                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            def srcportexit():
+                print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                os._exit(0)
+            while true:
+                print("----------------------------------")
+                print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
+                print("----------------------------------")
+                print("[1] Check all Packets")
+                print("[2] Check First 20 Packets")
+                print("[3] Check First {insert} Packets")
+                print("[4] Check Last 20 Packets")
+                print("[5] Check Last {insert} Packets")
+                print("[6] ")
+                print("[9] Main Menu")
+                print("[0] Exit")
+                print("----------------------------------")
+
+                srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+
+                if srcportoption ==1:
+                    srcport1()
+                elif srcportoption ==2:
+                    srcport2()
+                elif srcportoption ==4:
+                    srcport4()
+                elif srcportoption ==9:
+                    srcport9()
+                elif srcportoption ==0:
+                    srcportexit()
+                else:
+                    print(f'\nErmahgerd! Let us try, try again!')
+
+        ### DST PORT MENU ###
+
+
+        elif parseoption == 6:
+            def dstport1():
+                os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
+            def dstport2():     
+                os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
+            def dstport4():
+                os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
+            def dstport9():
+                menu()
+                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+            def dstportexit():
+                print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                os._exit(0)  
+
+            while True:
+                print("----------------------------------")
+                print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
+                print("----------------------------------")
+                print("[1] Check all Packets")
+                print("[2] Check First 20 Packets")
+                print("[3] Check First {insert} Packets")
+                print("[4] Check Last 20 Packets")
+                print("[5] Check Last {insert} Packets")
+                print("[6] ")
+                print("[9] Main Menu")
+                print("[0] Exit")
+                print("----------------------------------")
+
+                dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+
+                if dstportoption ==1:
+                    dstport1()
+                elif dstportoption ==2:
+                    dstport2()
+                elif dstportoption ==4:
+                    dstport4()
+                elif dstportoption ==9:
+                    dstport9()
+                elif dstportoption ==0:
+                    dstportexit()
+                else:
+                    print(f'\nOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.')
+
+
+        elif parseoption == 9:
+            menu()
+            option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+        elif parseoption ==0:
+            print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+            os._exit(0)
+        else:
+            print(f'\nDid you mean something else? Let\'s try again!')
 
 
 
@@ -247,73 +247,73 @@ def menu():
 
 ### MAIN MENU 2 - FREQUENCY TABLES ###
 
-    elif option == 2:
-        cnt= Counter()
-        for IP in srcIP:
-            cnt[IP] += 1
+elif option == 2:
+    cnt= Counter()
+    for IP in srcIP:
+        cnt[IP] += 1
 
-        for IP in dstIP:
-            cnt[IP] += 1
+    for IP in dstIP:
+        cnt[IP] += 1
 
-        dcnt= Counter()
-        for IP in dstIP:
-            dcnt[IP] += 1
+    dcnt= Counter()
+    for IP in dstIP:
+        dcnt[IP] += 1
 
-        srcs = [*set(srcIP)]
-        srctable = PrettyTable(["Src IP", "Count"])
-        for ip, count in cnt.most_common():
-            srctable.add_row([ip, count])
-        print(srctable)
+    srcs = [*set(srcIP)]
+    srctable = PrettyTable(["Src IP", "Count"])
+    for ip, count in cnt.most_common():
+        srctable.add_row([ip, count])
+    print(srctable)
 
-        dsttable = PrettyTable(["Dst IP", "Count"])
-        for ip, count in dcnt.most_common():
-            dsttable.add_row([ip, count])
-        print(dsttable)
+    dsttable = PrettyTable(["Dst IP", "Count"])
+    for ip, count in dcnt.most_common():
+        dsttable.add_row([ip, count])
+    print(dsttable)
 
-        portcnt = Counter()
-        for port in sport:
-            portcnt[port] +=1
-        srcandporttable=PrettyTable(["Ports", "Count"])
-        for port, count in portcnt.most_common():
-            srcandporttable.add_row([port, count])
-        print(srcandporttable)
-        menu()
-        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-        continue 
+    portcnt = Counter()
+    for port in sport:
+        portcnt[port] +=1
+    srcandporttable=PrettyTable(["Ports", "Count"])
+    for port, count in portcnt.most_common():
+        srcandporttable.add_row([port, count])
+    print(srcandporttable)
+    menu()
+    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+    continue 
 
 ### 3rd OPT - MOST COMMON ###
 
-    elif option == 3:
-        cnt1= Counter()
-        for IP in srcIP:
-            cnt1[IP] += 1
-        dcnt1= Counter()
-        for IP in dstIP:
-            dcnt1[IP] += 1
+elif option == 3:
+    cnt1= Counter()
+    for IP in srcIP:
+        cnt1[IP] += 1
+    dcnt1= Counter()
+    for IP in dstIP:
+        dcnt1[IP] += 1
 
-        srcs = [*set(srcIP)]
-        srctablemost= PrettyTable(["Src IP", "Count"])
-        for ip, count in cnt1.most_common():
-            srctablemost.add_row([ip, count])
+    srcs = [*set(srcIP)]
+    srctablemost= PrettyTable(["Src IP", "Count"])
+    for ip, count in cnt1.most_common():
+        srctablemost.add_row([ip, count])
 
-        dsttablemost=PrettyTable(["Dst IP", "Count"])
-        for ip, count in dcnt1.most_common():
-            dsttablemost.add_row([ip, count])
+    dsttablemost=PrettyTable(["Dst IP", "Count"])
+    for ip, count in dcnt1.most_common():
+        dsttablemost.add_row([ip, count])
 
-        portcnt1= Counter()
-        for port in sport:
-            portcnt1[port] +=1
-        porttablemost=PrettyTable(["Most Common Port", "Count"])
-        for port, count in portcnt1.most_common():
-            porttablemost.add_row([port, count])
-        print(porttablemost[0])
-        print(f'\nYour most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}\n')
-        menu()
-        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-    else:
-        print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
-        menu()
-        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+    portcnt1= Counter()
+    for port in sport:
+        portcnt1[port] +=1
+    porttablemost=PrettyTable(["Most Common Port", "Count"])
+    for port, count in portcnt1.most_common():
+        porttablemost.add_row([port, count])
+    print(porttablemost[0])
+    print(f'\nYour most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}\n')
+    menu()
+    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+else:
+    print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
+    menu()
+    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
 
 
 print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
