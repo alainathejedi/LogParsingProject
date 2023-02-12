@@ -64,8 +64,6 @@ def mainmenu():
         print("Invalid choice, try again.")
         mainmenu()
 
-mainmenu()
-
 
 ### MAIN MENU 1 - PARSE ###
 
@@ -342,6 +340,8 @@ else:
     print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
     mainmenu()
 
+    
+mainmenu()
 
 
 
