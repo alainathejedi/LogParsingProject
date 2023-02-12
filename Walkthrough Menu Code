@@ -35,10 +35,13 @@ os.system("tshark -r " + packets + " -T fields -e frame.number -e _ws.col.Time -
 os.system("head -n 30 " + filename)
 
 ###                                                                         ###
-### Introduction. Can explain about the Project, and also the MAIN MENU DEF ###
+###             Introduction. Can explain about the Project                 ###
 ###                                                                         ###
 
 print(f'\n\n\nHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later. \n\n\n')
+
+
+### MAIN MENU FUNCTION ###
 
 def mainmenu():
     print("----------------------------------")
@@ -65,8 +68,63 @@ def mainmenu():
         mainmenu()
 
 
-### MAIN MENU 1 - PARSE ###
+### MENU FUNCTION DEFINITIONS FOR ENTIRE CODE ###
 
+def convoipmenu():
+    print("----------------------------------")
+    print("IP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:")
+    print("----------------------------------")
+    print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
+    print("[2] Check All Packets - Src IP")
+    print("[3] Check All Packets - Dst IP")
+    print("[4] Check First 10 Packets - Src IP")
+    print("[5] Check First 10 Packets - Dst IP")
+    print("[6] Check Last 10 Packets - Src IP")
+    print("[7] Check Last 10 Packets - Dst IP")
+    print("[9] Main Menu")
+    print("[0] Exit")
+    print("----------------------------------")
+
+    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+
+    
+def srcportmenu():
+    print("----------------------------------")
+    print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
+    print("----------------------------------")
+    print("[1] Check all Packets")
+    print("[2] Check First 20 Packets")
+    print("[3] Check First {insert} Packets")
+    print("[4] Check Last 20 Packets")
+    print("[5] Check Last {insert} Packets")
+    print("[6] ")
+    print("[9] Main Menu")
+    print("[0] Exit")
+    print("----------------------------------")
+
+    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+
+def dstportmenu():
+    print("----------------------------------")
+    print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
+    print("----------------------------------")
+    print("[1] Check all Packets")
+    print("[2] Check First 20 Packets")
+    print("[3] Check First {insert} Packets")
+    print("[4] Check Last 20 Packets")
+    print("[5] Check Last {insert} Packets")
+    print("[6] ")
+    print("[9] Main Menu")
+    print("[0] Exit")
+    print("----------------------------------")
+
+    dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+
+    
+    
+    
+### MAIN MENU 1 - PARSING ###    
+    
 def option1():
     print("----------------------------------")
     print("PARSE: What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
@@ -82,33 +140,31 @@ def option1():
     print("----------------------------------")
 
 
-    parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-
-
+    parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n")) 
         ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
 
     if parseoption ==1:
         def sdip1():
             os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol\"}' | sort -n")
-            option1()
+            convoipmenu()
         def sdip2():
             os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-            option1()
+            convoipmenu()
         def sdip3():
             os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-            option1()
+            convoipmenu()
         def sdip4():
             os.system("head " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-            option1()
+            convoipmenu()
         def sdip5():
             os.system("head " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-            option1()
+            convoipmenu()
         def sdip6():
             os.system("tail " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-            option1()
+            convoipmenu()
         def sdip7():
             os.system("tail " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-            option1()
+            convoipmenu()
         def sdip9():
             mainmenu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
@@ -146,12 +202,13 @@ def option1():
                 sdip6()
             elif sdipoption ==7:
                 sdip7()
-            elif sdiption ==9:
+            elif sdipoption ==9:
                 sdip9()
             elif sdipoption ==0:
                 sdipexit()
             else:
                 print(f'\nNever fear, we can have another try! Choose wisely...')
+                convoipmenu()
                 
 
 
@@ -163,13 +220,13 @@ def option1():
     elif parseoption == 5:
         def srcport1():
             os.system("cat " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile.txt && cat catfile.txt")
-            option1()
+            srcportmenu()
         def srcport2():
             os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
-            option1()
+            srcportmenu()
         def srcport4():
             os.system("tail -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
-            option1()
+            srcportmenu()
         def srcport9():
             mainmenu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
@@ -211,13 +268,13 @@ def option1():
     elif parseoption ==6:
         def dstport1():
             os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
-            option1()
+            dstportmenu()
         def dstport2():     
             os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
-            option1()
+            dstportmenu()
         def dstport4():
             os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
-            option1()
+            dstportmenu()
         def dstport9():
             mainmenu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
