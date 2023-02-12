@@ -116,7 +116,53 @@ while option != 0:
                     print(f'\nOops! Let us try, try again!')
                     srcportmenu()
                     srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                    continue      
+               
+        parsemenu()
+        parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+        if parseoption == 6:
+            def dstportmenu():
+                print("----------------------------------")
+                print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
+                print("----------------------------------")
+                print("[1] Check all Packets")
+                print("[2] Check First 20 Packets")
+                print("[3] Check First {insert} Packets")
+                print("[4] Check Last 20 Packets")
+                print("[5] Check Last {insert} Packets")
+                print("[6] ")
+                print("[9] Main Menu")
+                print("[0] Exit")
+                print("----------------------------------")
+                
+            dstportmenu()
+            dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+            while srcportoption != 0:
+                if dstportoption == 1:
+                    ### os.system("cat " + filename + "| cut -f 6 | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > wholefile.txt | cat wholefile.txt") 
+                    os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
+                    dstportmenu()
+                    dstportoption=int(input("\nTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                    continue 
+                elif dstportoption == 2:
+                    os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
+                    dstportmenu()
+                    dstportoption=int(input("\nTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                    continue 
+                elif dstportoption == 4:
+                    os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
+                    dstportmenu()
+                    dstportoption=int(input("\nTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                    continue 
+                elif srcportoption == 9:
+                    menu()
+                    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
                     continue
+                else:
+                    print(f'\nOops! Let us try, try again!')
+                    dstportmenu()
+                    dstportoption=int(input("\nTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+                    continue  
         if parseoption == 1:
             def sdipmenu():
                 print("----------------------------------")
@@ -184,35 +230,6 @@ while option != 0:
                     sdipmenu()
                     sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
                     continue
-                if parseoption == 4:
-                    while parseoption == 4:
-                        tcp = os.system("cat " + filename | " | awk '{print $5}' | grep -i TCP* | wc -l ")
-                        continue
-                        icmp = os.system("cat " + filename | " | awk '{print $5}' | grep -i ICMP* | wc -l ")
-                        continue
-                        udp = os.system("cat " + filename | " | awk '{print $5}' | grep -i UDP* | wc -l ")
-                        continue
-                        dns = os.system("cat " + filename | " | awk '{print $5}' | grep -i DNS* | wc -l ")
-                        continue
-                        ftp = os.system("cat " + filename | " | awk '{print $5}' | grep -i FTP* | wc -l ")
-                        continue
-                        dhcp = os.system("cat " + filename | " | awk '{print $5}' | grep -i DHCP* | wc -l ")
-                        continue
-                        ntp = os.system("cat " + filename | " | awk '{print $5}' | grep -i NTP* | wc -l ")
-                        continue
-                        pop = os.system("cat " + filename | " | awk '{print $5}' | grep -i POP* | wc -l ")
-                        continue
-                        ssh = os.system("cat " + filename | " | awk '{print $5}' | grep -i SSH* | wc -l ")
-                        continue
-                        snmp = os.system("cat " + filename | " | awk '{print $5}' | grep -i SNMP* | wc -l ")
-                        continue
-                        smtp = os.system("cat " + filename | " | awk '{print $5}' | grep -i SMTP* | wc -l ")
-                        continue
-                        netbios = os.system("cat " + filename | " | awk '{print $5}' | grep -i NetBIOS* | wc -l ")
-                        continue
-
-                   
-                    
         elif parseoption == 9:
             menu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
@@ -221,7 +238,7 @@ while option != 0:
             print(f'\nDid you mean something else? Let\'s try again!')
             parsemenu()
             parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
-            
+            continue
 
 ### 2nd OPT - FREQUENCY TABLES ###
 
@@ -257,6 +274,7 @@ while option != 0:
         print(srcandporttable)
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+        continue 
         
 ### 3rd OPT - MOST COMMON ###
 
@@ -291,5 +309,6 @@ while option != 0:
         print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
         menu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
+        continue 
         
 print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
