@@ -217,48 +217,48 @@ def option1():
         ### DST PORT MENU ###
 
 
-        elif parseoption == 6:
-            def dstport1():
-                os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
-            def dstport2():     
-                os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
-            def dstport4():
-                os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
-            def dstport9():
-                mainmenu()
-                option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-            def dstportexit():
-                print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
-                os._exit(0)  
+    elif parseoption == 6:
+        def dstport1():
+            os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
+        def dstport2():     
+            os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
+        def dstport4():
+            os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
+        def dstport9():
+            mainmenu()
+            option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+        def dstportexit():
+            print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+            os._exit(0)  
 
-            while True:
-                print("----------------------------------")
-                print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-                print("----------------------------------")
-                print("[1] Check all Packets")
-                print("[2] Check First 20 Packets")
-                print("[3] Check First {insert} Packets")
-                print("[4] Check Last 20 Packets")
-                print("[5] Check Last {insert} Packets")
-                print("[6] ")
-                print("[9] Main Menu")
-                print("[0] Exit")
-                print("----------------------------------")
+        while True:
+            print("----------------------------------")
+            print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
+            print("----------------------------------")
+            print("[1] Check all Packets")
+            print("[2] Check First 20 Packets")
+            print("[3] Check First {insert} Packets")
+            print("[4] Check Last 20 Packets")
+            print("[5] Check Last {insert} Packets")
+            print("[6] ")
+            print("[9] Main Menu")
+            print("[0] Exit")
+            print("----------------------------------")
 
-                dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+            dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
 
-                if dstportoption ==1:
-                    dstport1()
-                elif dstportoption ==2:
-                    dstport2()
-                elif dstportoption ==4:
-                    dstport4()
-                elif dstportoption ==9:
-                    dstport9()
-                elif dstportoption ==0:
-                    dstportexit()
-                else:
-                    print(f'\nOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.')
+            if dstportoption ==1:
+                dstport1()
+            elif dstportoption ==2:
+                dstport2()
+            elif dstportoption ==4:
+                dstport4()
+            elif dstportoption ==9:
+                dstport9()
+            elif dstportoption ==0:
+                dstportexit()
+            else:
+                print(f'\nOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.')
 
 
     elif parseoption == 9:
