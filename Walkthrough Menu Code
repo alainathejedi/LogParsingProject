@@ -52,11 +52,11 @@ def mainmenu():
     
     option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
     
-    if option == 1:
+    if option ==1:
         option1()
-    elif option == 2:
+    elif option ==2:
         option2()
-    elif option == 3:
+    elif option ==3:
         option3()
     elif option ==0:
         exit()
@@ -132,7 +132,7 @@ def option1():
 
             sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
 
-            if sdipoption == 1:
+            if sdipoption ==1:
                 sdip1()
             elif sdipoption ==2:
                 sdip2()
@@ -208,7 +208,7 @@ def option1():
         ### DST PORT MENU ###
 
 
-    elif parseoption == 6:
+    elif parseoption ==6:
         def dstport1():
             os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
             option1()
@@ -255,7 +255,7 @@ def option1():
                 print(f'\nOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.')
 
 
-    elif parseoption == 9:
+    elif parseoption ==9:
         mainmenu()
         option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
     elif parseoption ==0:
