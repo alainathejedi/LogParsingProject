@@ -40,21 +40,6 @@ os.system("head -n 30 " + filename)
 
 print(f'\n\n\nHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later. \n\n\n')
 
-def menu():
-    while True:
-        print("----------------------------------")
-        print("*** MAIN MENU ***")
-        print("----------------------------------")
-        print("[1] Parse the File")
-        print("[2] Frequency Tables")
-        print("[3] Most Common IP/Port")
-        print("[0] Exit")
-        print("----------------------------------")
-        
-        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
-menu()
-
-
 def mainmenu():
     print("----------------------------------")
     print("*** MAIN MENU ***")
@@ -79,9 +64,7 @@ def mainmenu():
         print("Invalid choice, try again.")
         mainmenu()
 
-
-
-
+mainmenu()
 
 
 ### MAIN MENU 1 - PARSE ###
