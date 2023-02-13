@@ -45,7 +45,7 @@ print(f'\n\n\033[36mHi there! Welcome to Log Lollygagging, also called Project L
 
 def mainmenu():
     print("----------------------------------")
-    print("\033[32m*** MAIN MENU ***\033[0m")
+    print("\033[36m*** MAIN MENU ***\033[0m")
     print("----------------------------------")
     print("[1] Parse the File")
     print("[2] Frequency Tables")
@@ -54,7 +54,7 @@ def mainmenu():
     print("[0] Exit")
     print("----------------------------------")
     
-    option=int(input("\n\033[32mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
+    option=int(input("\n\033[36mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
     
     if option ==1:
         option1()
@@ -69,59 +69,6 @@ def mainmenu():
     else:
         print("Invalid choice, try again.")
         mainmenu()
-
-
-### MENU FUNCTION DEFINITIONS FOR ENTIRE CODE ###
-
-def convoipmenu():
-    print("----------------------------------")
-    print("IP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:")
-    print("----------------------------------")
-    print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
-    print("[2] Check All Packets - Src IP")
-    print("[3] Check All Packets - Dst IP")
-    print("[4] Check First 10 Packets - Src IP")
-    print("[5] Check First 10 Packets - Dst IP")
-    print("[6] Check Last 10 Packets - Src IP")
-    print("[7] Check Last 10 Packets - Dst IP")
-    print("[9] Main Menu")
-    print("[0] Exit")
-    print("----------------------------------")
-
-    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
-
-    
-def srcportmenu():
-    print("----------------------------------")
-    print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-    print("----------------------------------")
-    print("[1] Check all Packets")
-    print("[2] Check First 20 Packets")
-    print("[3] Check First {insert} Packets")
-    print("[4] Check Last 20 Packets")
-    print("[5] Check Last {insert} Packets")
-    print("[6] ")
-    print("[9] Main Menu")
-    print("[0] Exit")
-    print("----------------------------------")
-
-    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-
-def dstportmenu():
-    print("----------------------------------")
-    print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-    print("----------------------------------")
-    print("[1] Check all Packets")
-    print("[2] Check First 20 Packets")
-    print("[3] Check First {insert} Packets")
-    print("[4] Check Last 20 Packets")
-    print("[5] Check Last {insert} Packets")
-    print("[6] ")
-    print("[9] Main Menu")
-    print("[0] Exit")
-    print("----------------------------------")
-
-    dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
 
     
     
@@ -383,14 +330,14 @@ def option4():
     for packet in packets1:
         if 'TCP' in packet:
             if packet[TCP].dport == 80:
-                print('\033[31mTime: \033[0m', packet.time)
+                print('\033[35mTime: \033[0m', packet.time)
                 print('\033[34mSrc IP:\033[0m ', packet[IP].src)
                 print('\033[34mSrc Port:\033[0m ', packet[TCP].sport)
                 print('\033[33mDst IP: \033[0m', packet[IP].dst)
                 print('\033[33mDst Port: \033[0m', packet[TCP].dport)
                 
                 if Raw in packet:
-                    print('\033[35mPacket Data: \033[0m', str(packet[Raw].load))
+                    print('\033[31mPacket Data: \033[0m', str(packet[Raw].load))
                 print('---')
             else:
                 continue
