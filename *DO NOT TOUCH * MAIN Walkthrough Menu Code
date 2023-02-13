@@ -386,16 +386,16 @@ def option4():
     for packet in packets1:
         if 'TCP' in packet:
             if packet[TCP].dport == 80:
-                print('Packet Number: ', packetnumber)
-                print('Time: ', packet.time)
+                print('\033[32mPacket Number: \033[0m', packetnumber)
+                print('\033[31mTime: \033[0m', packet.time)
                 packetnumber += 1
-                print('Src IP: ', packet[IP].src)
-                print('Src Port: ', packet[TCP].sport)
-                print('Dst IP: ', packet[IP].dst)
-                print('Dst Port: ', packet[TCP].dport)
+                print('\033[34mSrc IP:\033[0m ', packet[IP].src)
+                print('\033[34mSrc Port:\033[0m ', packet[TCP].sport)
+                print('\033[33mDst IP: \033[0m', packet[IP].dst)
+                print('\033[33mDst Port: \033[0m', packet[TCP].dport)
                 
                 if Raw in packet:
-                    print('Packet Data: ', str(packet[Raw].load))
+                    print('\033[35mPacket Data: \033[0m', str(packet[Raw].load))
                 print('---')
             else:
                 continue
