@@ -389,16 +389,16 @@ def option4():
             ip = eth.data
             tcp = ip.data
             
-           if isinstance(tcp, dpkt.tcp.TCP) and tcp.dport == portnumber:
-               print('Time: ', timestamp)
-               print('Src IP: ', socket.inet_ntoa(ip.src))
-               print ('Dst IP: ' , socket.inet_ntoa(ip.dst))
-               print('Src Port: ', tcp.sport)
-               print('Dst Port: ', tcp.dport)
-               print('Data: ', tcp.data)
-               print('---')
-           else:
-            print('OK')
+            if isinstance(tcp, dpkt.tcp.TCP) and tcp.dport == portnumber:
+                print('Time: ', timestamp)
+                print('Src IP: ', socket.inet_ntoa(ip.src))
+                print ('Dst IP: ' , socket.inet_ntoa(ip.dst))
+                print('Src Port: ', tcp.sport)
+                print('Dst Port: ', tcp.dport)
+                print('Data: ', tcp.data)
+                print('---')
+            else:
+                print('OK')
         
           
 def exit():
