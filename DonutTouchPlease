@@ -382,7 +382,8 @@ def option3():
 
 def option4():
     portnumber = 80
-    with open({pcap}, 'rb') as f:
+    reminder=input("It has been many moons and I am forgetful. What was the pcap file you were wanting to look through again?")
+    with open({reminder}, 'rb') as f:
         pcap1 = dpkt.pcap.Reader(f)
         for timestamp, buf in pcap1:
             eth = dpkt.ethernet.Ethernet(buf)
