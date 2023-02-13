@@ -50,7 +50,7 @@ def mainmenu():
     print("[1] Parse the File")
     print("[2] Frequency Tables")
     print("[3] Most Common IP/Port")
-    print("[4] HTTP Data
+    print("[4] HTTP Data")
     print("[0] Exit")
     print("----------------------------------")
     
@@ -149,25 +149,18 @@ def option1():
     if parseoption ==1:
         def sdip1():
             os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol\"}' | sort -n")
-            convoipmenu()
         def sdip2():
             os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-            convoipmenu()
         def sdip3():
             os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-            convoipmenu()
         def sdip4():
             os.system("head " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-            convoipmenu()
         def sdip5():
             os.system("head " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-            convoipmenu()
         def sdip6():
             os.system("tail " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-            convoipmenu()
         def sdip7():
             os.system("tail " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-            convoipmenu()
         def sdip9():
             mainmenu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
@@ -223,13 +216,10 @@ def option1():
     elif parseoption == 5:
         def srcport1():
             os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
-            srcportmenu()
         def srcport2():
             os.system("head -n 20 " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
-            srcportmenu()
         def srcport4():
             os.system("tail -n 20 " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
-            srcportmenu()
         def srcport9():
             mainmenu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
@@ -271,13 +261,10 @@ def option1():
     elif parseoption ==6:
         def dstport1():
             os.system("cat " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
-            dstportmenu()
         def dstport2():     
             os.system("head -n 20  " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
-            dstportmenu()
         def dstport4():
             os.system("tail -n 20 " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
-            dstportmenu()
         def dstport9():
             mainmenu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
