@@ -31,7 +31,7 @@ for pkt in pcap:
 
 packets=input("\nRemind me of the pcap again? I am just checking, because I'm insecure (coding is fun, we make jokes :) ) \n")
 filename=input("\nWhat would you like to name the text file of the log? It should be FILENAME.txt: \n")
-os.system("tshark -r " + packets + " -T fields -e frame.number -e _ws.col.Time -e _ws.col.Source -e _ws.col.Destination -e _ws.col.Protocol -e _ws.col.Info > " + filename)
+os.system("tshark -r " + packets + " -T fields -e frame.number -e _ws.col.Time -e ip.src -e ip.dst -e _ws.col.Protocol -e tcp.srcport -e tcp.dstport -e http.file_data  > " + filename)
 os.system("head -n 30 " + filename)
 
 ###                                                                         ###
@@ -50,6 +50,7 @@ def mainmenu():
     print("[1] Parse the File")
     print("[2] Frequency Tables")
     print("[3] Most Common IP/Port")
+    print("[4] HTTP Data")
     print("[0] Exit")
     print("----------------------------------")
     
@@ -61,6 +62,8 @@ def mainmenu():
         option2()
     elif option ==3:
         option3()
+    elif option ==4:
+        option4()
     elif option ==0:
         exit()
     else:
@@ -212,11 +215,11 @@ def option1():
 
     elif parseoption == 5:
         def srcport1():
-            os.system("cat " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile.txt && cat catfile.txt")
+            os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
         def srcport2():
-            os.system("head -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile.txt && cat headfile.txt")
+            os.system("head -n 20 " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
         def srcport4():
-            os.system("tail -n 20 " + filename + " | awk '{if ($6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile.txt && cat tailfile.txt")
+            os.system("tail -n 20 " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
         def srcport9():
             mainmenu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
@@ -257,11 +260,11 @@ def option1():
 
     elif parseoption ==6:
         def dstport1():
-            os.system("cat " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > catfile2.txt && cat catfile2.txt")
+            os.system("cat " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
         def dstport2():     
-            os.system("head -n 20  " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > headfile2.txt && cat headfile2.txt")
+            os.system("head -n 20  " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
         def dstport4():
-            os.system("tail -n 20 " + filename + " | awk '{if (++count[$2] $6 ~ /^[0-9]+$/) print $6}' | sort | uniq -c | sort -nr > tailfile2.txt && cat tailfile2.txt")
+            os.system("tail -n 20 " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
         def dstport9():
             mainmenu()
             option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
@@ -377,6 +380,27 @@ def option3():
     print(f'\nYour most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}\n')
     mainmenu()
 
+def option4():
+    packets1=rdpcap(input("It has been a little bit! Remind me again of your pcap file?"))
+    packetnumber = 1
+    for packet in packets1:
+        if 'TCP' in packet:
+            if packet[TCP].dport == 80:
+                print('Packet Number: ', packetnumber)
+                print('Time: ', packet.time)
+                packetnumber += 1
+                print('Src IP: ', packet[IP].src)
+                print('Src Port: ', packet[TCP].sport)
+                print('Dst IP: ', packet[IP].dst)
+                print('Dst Port: ', packet[TCP].dport)
+                
+                if Raw in packet:
+                    print('Packet Data: ', str(packet[Raw].load))
+                print('---')
+            else:
+                continue
+        
+          
 def exit():
     print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
     os._exit(0)
