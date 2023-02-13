@@ -231,7 +231,7 @@ def option1():
             print("[0] Exit")
             print("----------------------------------")
 
-            dstportoption=int(input("\n\033[33mTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\033[0m\n"))
+            dstportoption=int(input("\n\033[33mTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\033[0m\n"))
 
             if dstportoption ==1:
                 dstport1()
