@@ -381,9 +381,25 @@ def option3():
     mainmenu()
 
 def option4():
-    os.system("tshark -r " + packets + " -T fields -e frame.number -e ip.src -e ip.dst -e _ws.col.Protocol -e http.file_data | grep HTTP | grep -i -e get -e post | awk -F '\t' '{ printf \"%-10s %-10s %-10s %-10s\n\", \"\033[35m***Packet***:\033[0m \" $1, \"\033[34m**SRC**:\033[0m \" $2, \"\033[33m**DST**:\033[0m \"$3, \"\033[31m**INFO**:\033[0m \"$7}' ")
-    print("The juciest parts of some logs are in the HTTP data sometimes! Here, you can find evidence of GET requests, SQL language, and so much more. It can help you have a better understanding of what all is going on within an event or incident. Above listed are the packet numbers, the SRC and DST IPs, and any data pulled from HTTP requests.")
-    mainmenu()
+    portnumber = 80
+    with open({pcap}, 'rb') as f:
+        pcap1 = dpkt.pcap.Reader(f)
+        for timestamp, buf in pcap1:
+            eth = dpkt.ethernet.Ethernet(buf)
+            ip = eth.data
+            tcp = ip.data
+            
+           if isinstance(tcp, dpkt.tcp.TCP) and tcp.dport == portnumber:
+               print('Time: ', timestamp)
+               print('Src IP: ', socket.inet_ntoa(ip.src))
+               print ('Dst IP: ' , socket.inet_ntoa(ip.dst))
+               print('Src Port: ', tcp.sport)
+               print('Dst Port: ', tcp.dport)
+               print('Data: ', tcp.data)
+               print('---')
+           else:
+            print('OK')
+        
           
 def exit():
     print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
