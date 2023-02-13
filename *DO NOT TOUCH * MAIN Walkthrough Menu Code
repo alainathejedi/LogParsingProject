@@ -7,7 +7,7 @@ from collections import Counter
 ##Defining the variables, mostly used later in the code. ###
 
 
-pcap=rdpcap(input("\nWhat is your pcap? \n"))
+pcap=rdpcap(input("\n\033[33mWhat is your pcap? \033[0m\n"))
 
 
 srcIP=[]
@@ -45,7 +45,7 @@ print(f'\n\n\033[36mHi there! Welcome to Log Lollygagging, also called Project L
 
 def mainmenu():
     print("----------------------------------")
-    print("*** MAIN MENU ***")
+    print("\033[32m*** MAIN MENU ***\033[0m")
     print("----------------------------------")
     print("[1] Parse the File")
     print("[2] Frequency Tables")
@@ -227,7 +227,7 @@ def option1():
             os._exit(0)
         while True:
             print("----------------------------------")
-            print("\033[34mSRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\033[0m\n")
+            print("\033[34mSRC PORTS: \033[0mThis menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\033[0m\n")
             print("----------------------------------")
             print("[1] Check all Packets")
             print("[2] Check First 20 Packets")
@@ -378,7 +378,7 @@ def option3():
     mainmenu()
 
 def option4():
-    packets1=rdpcap(input("It has been a little bit! Remind me again of your pcap file?"))
+    packets1=rdpcap(input("\n\033[33mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
     packetnumber = 1
     for packet in packets1:
         if 'TCP' in packet:
