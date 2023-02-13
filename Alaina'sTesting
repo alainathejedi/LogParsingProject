@@ -381,22 +381,14 @@ def option3():
     mainmenu()
 
 def option4():
-    portnumber = 80
-    reminder=input("It has been many moons and I am forgetful. What was the pcap file you were wanting to look through again?")
-    with open({reminder}, 'rb') as f:
-        pcap1 = dpkt.pcap.Reader(f)
-        for timestamp, buf in pcap1:
-            eth = dpkt.ethernet.Ethernet(buf)
-            ip = eth.data
-            tcp = ip.data
-            
-            if isinstance(tcp, dpkt.tcp.TCP) and tcp.dport == portnumber:
-                print('Time: ', timestamp)
-                print('Src IP: ', socket.inet_ntoa(ip.src))
-                print ('Dst IP: ' , socket.inet_ntoa(ip.dst))
-                print('Src Port: ', tcp.sport)
-                print('Dst Port: ', tcp.dport)
-                print('Data: ', tcp.data)
+    for pkt in packets:
+        if TCP in pkt:
+            if pkt[TCP].dport == 80:
+                print('Src IP: ', pkt[IP].src)
+                print('Src Port: ' pkt[IP].sport)
+                print('Dst IP: ', pkt[IP].dst)
+                print('Dst Port: ', pkt[IP].dport
+                print('Packet Data: ', pkt[TCP].load.decode("utf-8"))
                 print('---')
             else:
                 print('OK')
