@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-import os
+import os 
+import sys
+import subprocess
 from scapy.all import *
 from prettytable import PrettyTable
 from collections import Counter
@@ -50,6 +52,7 @@ def mainmenu():
     print("[1] Parse the File")
     print("[2] Frequency Tables")
     print("[3] Most Common IP/Port")
+    print("[4] Malware") 
     print("[0] Exit")
     print("----------------------------------")
     
@@ -61,6 +64,8 @@ def mainmenu():
         option2()
     elif option ==3:
         option3()
+    elif option ==4:
+        option4() 
     elif option ==0:
         exit()
     else:
@@ -384,3 +389,41 @@ def exit():
 
     
 mainmenu()
+
+### 4th OPT - MALWARE ###
+
+def option4():
+    if len(sys.argv) != 2:
+    print("Usage: python3 find_malware.py pcap_file")
+    sys.exit(1)
+
+pcap_file = sys.argv[1]
+
+print("Extracting DNS requests from " + pcap_file + "...")
+result = subprocess.run(["tshark", "-r", pcap_file, "-T", "fields", "-e", "dns.qry.name"], capture_output=True, text=True)
+with open("dns_requests.txt", "w") as f:
+    f.write(result.stdout)
+print("DNS requests extracted successfully.")
+
+print("What would you like to do next?")
+print("1. Search for known malicious domains in the DNS requests")
+print("2. Quit")
+
+choice = input("Enter your choice [1-2]: ")
+
+if choice == "1":
+    with open("dns_requests.txt", "r") as f:
+        dns_requests = f.read()
+    with open("malicious_domains.txt", "r") as f:
+        malicious_domains = f.read()
+    if malicious_domains in dns_requests:
+        print("Malware detected in pcap file " + pcap_file)
+    else:
+        print("No malware detected in pcap file " + pcap_file)
+elif choice == "2":
+    sys.exit(0)
+else:
+    print("Invalid choice. Exiting.")
+    sys.exit(1)
+mainmenu()
+
