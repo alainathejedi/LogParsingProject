@@ -381,7 +381,7 @@ def option3():
     mainmenu()
 
 def option4():
-    os.system("tshark -r " + packets + " -T fields -e frame.number -e ip.src -e ip.dst -e _ws.col.Protocol -e tcp.srcport -e tcp.dstport -e http.file_data | grep HTTP | grep -i -e get -e post -e del | awk -F '\t' '{ printf "%-10s %-10s %-10s %-10s\n", "\033[35m***Packet***:\033[0m " $1, "\033[34m**SRC**:\033[0m " $2, "\033[33m**DST**:\033[0m "$3, "\033[31m**INFO**:\033[0m "$7}' ")
+    os.system("tshark -r " + packets + " -T fields -e frame.number -e ip.src -e ip.dst -e _ws.col.Protocol -e http.file_data | grep HTTP | grep -i -e get -e post | awk -F '\t' '{ printf \"%-10s %-10s %-10s %-10s\n\", \"\033[35m***Packet***:\033[0m \" $1, \"\033[34m**SRC**:\033[0m \" $2, \"\033[33m**DST**:\033[0m \"$3, \"\033[31m**INFO**:\033[0m \"$7}' ")
     print("The juciest parts of some logs are in the HTTP data sometimes! Here, you can find evidence of GET requests, SQL language, and so much more. It can help you have a better understanding of what all is going on within an event or incident. Above listed are the packet numbers, the SRC and DST IPs, and any data pulled from HTTP requests.")
     mainmenu()
           
