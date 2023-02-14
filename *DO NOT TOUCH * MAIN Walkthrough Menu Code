@@ -3,6 +3,8 @@ import os
 from scapy.all import *
 from prettytable import PrettyTable
 from collections import Counter
+import pyfiglet 
+from termcolor import colored
 
 
 ### Welcome! This is a walkthrough log parsing code. You will be able to load a pcap file and then check SRC and DST IP, Ports, Protocols, and HTTP information.
@@ -45,9 +47,13 @@ os.system("head -n 30 " + filename)
 ###             Introduction. Can explain about the Project                 ###
 ###                                                                         ###
 
-os.system("figlet -c -f big Team L.L.A.M.A.")
+#os.system("figlet -c -f big Team L.L.A.M.A.")
+text = "Project L.L.A.M.A."
+asciitext=pyfiglet.figlet_format(text, font ='big')
+coloredtext= colored(asciitext, 'cyan', attrs=["bold"])
+print(coloredtext)
 print(f'\033[38;5;156mLog Lollygagging with Almir, Misheon, and Alaina the Jedi\033[0m\n')
-print(f'\n\n\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m\n\n')
+print(f'\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m')
 
 
 ### MAIN MENU FUNCTION ###
@@ -71,6 +77,8 @@ def mainmenu():
         option2()
     elif option ==3:
         option3()
+    elif option ==4:
+        option4()
     elif option ==0:
         exit()
     else:
