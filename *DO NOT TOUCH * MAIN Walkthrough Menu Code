@@ -111,7 +111,7 @@ def option1():
         def sdip9():
             mainmenu()
         def sdipexit():
-            print(f'\n\033[36mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+            print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
             os._exit(0)
         while True:
             print("----------------------------------")
@@ -172,7 +172,7 @@ def option1():
         def srcport9():
             mainmenu()
         def srcportexit():
-            print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+            print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
             os._exit(0)
         while True:
             print("----------------------------------")
@@ -214,7 +214,7 @@ def option1():
         def dstport9():
             mainmenu()
         def dstportexit():
-            print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+            print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
             os._exit(0)  
 
         while True:
@@ -248,7 +248,7 @@ def option1():
     elif parseoption ==9:
         mainmenu()
     elif parseoption ==0:
-        print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+        print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
         os._exit(0)
     else:
         print(f'\n\033[31mOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\033[0m\n')
@@ -347,7 +347,7 @@ def option4():
 
     
 def exit():
-    print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+    print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
     os._exit(0)
    
 
