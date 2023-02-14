@@ -52,7 +52,6 @@ def mainmenu():
     print("[1] Parse the File")
     print("[2] Frequency Tables")
     print("[3] Most Common IP/Port")
-    print("[4] HTTP Data")
     print("[0] Exit")
     print("----------------------------------")
     
@@ -64,8 +63,6 @@ def mainmenu():
         option2()
     elif option ==3:
         option3()
-    elif option ==4:
-        option4()
     elif option ==0:
         exit()
     else:
@@ -244,7 +241,27 @@ def option1():
             else:
                 print(f'\n\033[31mOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.\033[0m')
 
+    elif parseoption ==5:
+        def parseoption5():
+        packets1=rdpcap(input("\n\033[38;5;196mIt has been a little bit! Remind me again of your pcap file?\033[0m\n"))
+        packetnumber = 1
+        for packet in packets1:
+            if 'TCP' in packet:
+                if packet[TCP].dport == 80:
+                    print('\033[35mTime: \033[0m', packet.time)
+                    print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
+                    print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
+                    print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
+                    print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
 
+                    if Raw in packet:
+                        print('\033[38;5;196mPacket Data: \033[0m', str(packet[Raw].load))
+                    print('---')
+                else:
+                    continue
+                mainmenu()
+
+                
     elif parseoption ==9:
         mainmenu()
     elif parseoption ==0:
@@ -321,24 +338,6 @@ def option3():
     print(porttablemost[0])
     print(f'\n\033[38;5;9mYour most frequent source and destination IP, as well as their frequency are Source:\033[0m\n {srctablemost[0]} \n \033[38;5;9mand Destination:\033[0m \n{dsttablemost[0]} \033[0m\n')
     mainmenu()
-
-def option4():
-    packets1=rdpcap(input("\n\033[38;5;99mmIt has been a little bit! Remind me again of your pcap file?\033[0m\n"))
-    packetnumber = 1
-    for packet in packets1:
-        if 'TCP' in packet:
-            if packet[TCP].dport == 80:
-                print('\033[35mTime: \033[0m', packet.time)
-                print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
-                print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
-                print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
-                print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
-                
-                if Raw in packet:
-                    print('\033[38;5;99mPacket Data: \033[0m', str(packet[Raw].load))
-                print('---')
-            else:
-                continue
         
       
           
