@@ -7,7 +7,7 @@ from collections import Counter
 ##Defining the variables, mostly used later in the code. ###
 
 
-pcap=rdpcap(input("\n\033[33mWhat is your pcap? \033[0m\n"))
+pcap=rdpcap(input("\n\033[38;5;156mWhat is your pcap? \033[0m\n"))
 
 
 srcIP=[]
@@ -29,8 +29,8 @@ for pkt in pcap:
         except:
             pass
 
-packets=input("\n\033[33mRemind me of the pcap again? I am just checking, because I'm insecure (coding is fun, we make jokes :) )\033[0m \n")
-filename=input("\n\033[33mWhat would you like to name the text file of the log? It should be FILENAME.txt:\033[0m \n")
+packets=input("\n\033[38;5;156mRemind me of the pcap again? I am just checking, because I'm insecure (coding is fun, we make jokes :) )\033[0m \n")
+filename=input("\n\033[38;5;156mWhat would you like to name the text file of the log? It should be FILENAME.txt:\033[0m \n")
 os.system("tshark -r " + packets + " -T fields -e frame.number -e _ws.col.Time -e ip.src -e ip.dst -e _ws.col.Protocol -e tcp.srcport -e tcp.dstport -e http.file_data  > " + filename)
 os.system("head -n 30 " + filename)
 
@@ -77,7 +77,7 @@ def mainmenu():
     
 def option1():
     print("----------------------------------")
-    print("\033[202mPARSE:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
+    print("\033[38;5;202mPARSE:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
     print("----------------------------------")
     print("[1] \033[38;5;212mConversations and IPs\033[0m")
     print("[2] \033[38;5;99mProtocols\033[0m")
@@ -87,7 +87,7 @@ def option1():
     print("----------------------------------")
 
 
-    parseoption=int(input("\n\033[202mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
+    parseoption=int(input("\n\033[38;5;202mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
     
     
     ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
