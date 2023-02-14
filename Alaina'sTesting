@@ -4,10 +4,17 @@ from scapy.all import *
 from prettytable import PrettyTable
 from collections import Counter
 
+
+### Welcome! This is a walkthrough log parsing code. You will be able to load a pcap file and then check SRC and DST IP, Ports, Protocols, and HTTP information.
+### It will show you counts and frequencies, conversations, and then any file data pulled from HTTP GET requests!
+
+
+
+
 ##Defining the variables, mostly used later in the code. ###
 
 
-pcap=rdpcap(input("\n\033[33mWhat is your pcap? \033[0m\n"))
+pcap=rdpcap(input("\n\033[38;5;156mWhat is your pcap? \033[0m\n"))
 
 
 srcIP=[]
@@ -29,8 +36,8 @@ for pkt in pcap:
         except:
             pass
 
-packets=input("\n\033[33mRemind me of the pcap again? I am just checking, because I'm insecure (coding is fun, we make jokes :) )\033[0m \n")
-filename=input("\n\033[33mWhat would you like to name the text file of the log? It should be FILENAME.txt:\033[0m \n")
+packets=input("\n\033[38;5;156mRemind me of the pcap again? I am just checking, because I'm insecure (coding is fun, we make jokes :) )\033[0m \n")
+filename=input("\n\033[38;5;156mWhat would you like to name the text file of the log? It should be FILENAME.txt:\033[0m \n")
 os.system("tshark -r " + packets + " -T fields -e frame.number -e _ws.col.Time -e ip.src -e ip.dst -e _ws.col.Protocol -e tcp.srcport -e tcp.dstport -e http.file_data  > " + filename)
 os.system("head -n 30 " + filename)
 
@@ -38,16 +45,20 @@ os.system("head -n 30 " + filename)
 ###             Introduction. Can explain about the Project                 ###
 ###                                                                         ###
 
-os.system("figlet -f big Team L.L.A.M.A.")
-print(f'\033[96mLog Lollygagging with Alaina, Misheon, and Almir\033[0m\n')
-print(f'\n\n\033[96mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m\n\n')
+#os.system("figlet -c -f big Team L.L.A.M.A.")
+text = "Project L.L.A.M.A."
+asciitext=figlet.format(text, font ='big')
+coloredtext= colored(asciitext, 'cyan')
+print(coloredtext)
+print(f'\033[38;5;156mLog Lollygagging with Almir, Misheon, and Alaina the Jedi\033[0m\n')
+print(f'\n\n\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m\n\n')
 
 
 ### MAIN MENU FUNCTION ###
 
 def mainmenu():
     print("----------------------------------")
-    print("\033[96m*** MAIN MENU ***\033[0m")
+    print("\033[38;5;156m*** MAIN MENU ***\033[0m")
     print("----------------------------------")
     print("[1] Parse the File")
     print("[2] Frequency Tables")
@@ -56,7 +67,7 @@ def mainmenu():
     print("[0] Exit")
     print("----------------------------------")
     
-    option=int(input("\n\033[96mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
+    option=int(input("\n\033[38;5;156mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
     
     if option ==1:
         option1()
@@ -67,7 +78,7 @@ def mainmenu():
     elif option ==0:
         exit()
     else:
-        print("Invalid choice, try again.")
+        print("\033[31mInvalid choice, try again.\033[0m")
         mainmenu()
 
     
@@ -77,7 +88,7 @@ def mainmenu():
     
 def option1():
     print("----------------------------------")
-    print("\033[9mPARSE:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
+    print("\033[38;5;202mPARSE:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
     print("----------------------------------")
     print("[1] \033[38;5;212mConversations and IPs\033[0m")
     print("[2] \033[38;5;99mProtocols\033[0m")
@@ -87,7 +98,7 @@ def option1():
     print("----------------------------------")
 
 
-    parseoption=int(input("\n\033[9mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
+    parseoption=int(input("\n\033[38;5;202mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
     
     
     ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
@@ -111,7 +122,7 @@ def option1():
         def sdip9():
             mainmenu()
         def sdipexit():
-            print(f'\n\033[36mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+            print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
             os._exit(0)
         while True:
             print("----------------------------------")
@@ -172,7 +183,7 @@ def option1():
         def srcport9():
             mainmenu()
         def srcportexit():
-            print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+            print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
             os._exit(0)
         while True:
             print("----------------------------------")
@@ -214,7 +225,7 @@ def option1():
         def dstport9():
             mainmenu()
         def dstportexit():
-            print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+            print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
             os._exit(0)  
 
         while True:
@@ -248,7 +259,7 @@ def option1():
     elif parseoption ==9:
         mainmenu()
     elif parseoption ==0:
-        print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+        print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
         os._exit(0)
     else:
         print(f'\n\033[31mOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\033[0m\n')
@@ -347,7 +358,7 @@ def option4():
 
     
 def exit():
-    print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+    print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
     os._exit(0)
    
 
