@@ -3,7 +3,7 @@ import os
 from scapy.all import *
 from prettytable import PrettyTable
 from collections import Counter
-import figlet
+import pyfiglet
 from termcolor import colored
 
 
