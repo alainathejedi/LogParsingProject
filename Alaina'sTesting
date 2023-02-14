@@ -52,6 +52,7 @@ def mainmenu():
     print("[1] Parse the File")
     print("[2] Frequency Tables")
     print("[3] Most Common IP/Port")
+    print("[4] HTTP Data")
     print("[0] Exit")
     print("----------------------------------")
     
@@ -71,8 +72,8 @@ def mainmenu():
 
     
     
-    
 ### MAIN MENU 1 - PARSING ###    
+    
     
 def option1():
     print("----------------------------------")
@@ -82,14 +83,16 @@ def option1():
     print("[2] \033[38;5;99mProtocols\033[0m")
     print("[3] \033[38;5;51mSrc Ports\033[0m")
     print("[4] \033[38;5;228mDst Ports\033[0m")
-    print("[5] \033[38;5;196mInfo\033[0m")
     print("[9] \033[96mMain Menu\033[0m")
     print("----------------------------------")
 
 
     parseoption=int(input("\n\033[9mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
-        ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
+    
+    
+    ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
 
+    
     if parseoption ==1:
         def sdip1():
             os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol\"}' | sort -n")
@@ -155,7 +158,7 @@ def option1():
             
 
 
-        ### SRC PORT PARSING MENU ###
+    ### SRC PORT PARSING MENU ###
 
 
 
@@ -198,7 +201,7 @@ def option1():
             else:
                 print(f'\n\033[31mErmahgerd! Let us try, try again!\033[0m')
 
-        ### DST PORT MENU ###
+    ### DST PORT MENU ###
 
 
     elif parseoption ==4:
@@ -241,25 +244,6 @@ def option1():
             else:
                 print(f'\n\033[31mOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.\033[0m')
 
-    elif parseoption ==5:
-        def parseoption5():
-        packets1=rdpcap(input("\n\033[33mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
-        packetnumber = 1
-        for packet in packets1:
-            if 'TCP' in packet:
-                if packet[TCP].dport == 80:
-                    print('\033[35mTime: \033[0m', packet.time)
-                    print('\033[34mSrc IP:\033[0m ', packet[IP].src)
-                    print('\033[34mSrc Port:\033[0m ', packet[TCP].sport)
-                    print('\033[33mDst IP: \033[0m', packet[IP].dst)
-                    print('\033[33mDst Port: \033[0m', packet[TCP].dport)
-
-                    if Raw in packet:
-                        print('\033[31mPacket Data: \033[0m', str(packet[Raw].load))
-                    print('---')
-                else:
-                    continue
-
                 
     elif parseoption ==9:
         mainmenu()
@@ -269,8 +253,6 @@ def option1():
     else:
         print(f'\n\033[31mOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\033[0m\n')
         option1()
-
-
 
 
 
@@ -309,7 +291,7 @@ def option2():
     mainmenu()
    
 
-### 3rd OPT - MOST COMMON ###
+### MAIN MENU 3 - MOST COMMON ###
 
 def option3():
     cnt1= Counter()
@@ -337,9 +319,34 @@ def option3():
     print(porttablemost[0])
     print(f'\n\033[38;5;9mYour most frequent source and destination IP, as well as their frequency are Source:\033[0m\n {srctablemost[0]} \n \033[38;5;9mand Destination:\033[0m \n{dsttablemost[0]} \033[0m\n')
     mainmenu()
-        
-      
-          
+
+    
+    
+### MAIN MENU 4 - HTTP INFO ###
+
+
+def option4():
+    packets1=rdpcap(input("\n\033[38;5;196mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
+    packetnumber = 1
+    for packet in packets1:
+        if 'TCP' in packet:
+            if packet[TCP].dport == 80:
+                print('\033[35mTime: \033[0m', packet.time)
+                print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
+                print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
+                print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
+                print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
+                
+                if Raw in packet:
+                    print('\033[38;5;196mPacket Data: \033[0m', str(packet[Raw].load))
+                print('---')
+            else:
+                continue
+
+                
+### MAIN MENU - EXIT ###
+
+    
 def exit():
     print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
     os._exit(0)
