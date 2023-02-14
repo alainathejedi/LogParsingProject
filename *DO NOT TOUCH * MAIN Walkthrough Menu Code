@@ -4,6 +4,13 @@ from scapy.all import *
 from prettytable import PrettyTable
 from collections import Counter
 
+
+### Welcome! This is a walkthrough log parsing code. You will be able to load a pcap file and then check SRC and DST IP, Ports, Protocols, and HTTP information.
+### It will show you counts and frequencies, conversations, and then any file data pulled from HTTP GET requests!
+
+
+
+
 ##Defining the variables, mostly used later in the code. ###
 
 
