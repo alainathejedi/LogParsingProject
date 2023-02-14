@@ -45,8 +45,8 @@ os.system("head -n 30 " + filename)
 ###             Introduction. Can explain about the Project                 ###
 ###                                                                         ###
 
-os.system("figlet -f big Team L.L.A.M.A.")
-print(f'\033[38;5;156mLog Lollygagging with Alaina, Misheon, and Almir\033[0m\n')
+os.system("figlet -c -f big Team L.L.A.M.A.")
+print(f'\033[38;5;156mLog Lollygagging with Almir, Misheon, and Alaina the Jedi\033[0m\n')
 print(f'\n\n\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m\n\n')
 
 
