@@ -7,7 +7,7 @@ from collections import Counter
 ##Defining the variables, mostly used later in the code. ###
 
 
-pcap=rdpcap(input("\nWhat is your pcap? \n"))
+pcap=rdpcap(input("\n\033[33mWhat is your pcap? \033[0m\n"))
 
 
 srcIP=[]
@@ -29,8 +29,8 @@ for pkt in pcap:
         except:
             pass
 
-packets=input("\nRemind me of the pcap again? I am just checking, because I'm insecure (coding is fun, we make jokes :) ) \n")
-filename=input("\nWhat would you like to name the text file of the log? It should be FILENAME.txt: \n")
+packets=input("\n\033[33mRemind me of the pcap again? I am just checking, because I'm insecure (coding is fun, we make jokes :) )\033[0m \n")
+filename=input("\n\033[33mWhat would you like to name the text file of the log? It should be FILENAME.txt:\033[0m \n")
 os.system("tshark -r " + packets + " -T fields -e frame.number -e _ws.col.Time -e ip.src -e ip.dst -e _ws.col.Protocol -e tcp.srcport -e tcp.dstport -e http.file_data  > " + filename)
 os.system("head -n 30 " + filename)
 
@@ -38,14 +38,16 @@ os.system("head -n 30 " + filename)
 ###             Introduction. Can explain about the Project                 ###
 ###                                                                         ###
 
-print(f'\n\n\nHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later. \n\n\n')
+os.system("figlet -f big Team L.L.A.M.A.")
+print(f'\033[96mLog Lollygagging with Alaina, Misheon, and Almir\033[0m\n')
+print(f'\n\n\033[96mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m\n\n')
 
 
 ### MAIN MENU FUNCTION ###
 
 def mainmenu():
     print("----------------------------------")
-    print("*** MAIN MENU ***")
+    print("\033[96m*** MAIN MENU ***\033[0m")
     print("----------------------------------")
     print("[1] Parse the File")
     print("[2] Frequency Tables")
@@ -54,7 +56,7 @@ def mainmenu():
     print("[0] Exit")
     print("----------------------------------")
     
-    option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
+    option=int(input("\n\033[96mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
     
     if option ==1:
         option1()
@@ -70,59 +72,6 @@ def mainmenu():
         print("Invalid choice, try again.")
         mainmenu()
 
-
-### MENU FUNCTION DEFINITIONS FOR ENTIRE CODE ###
-
-def convoipmenu():
-    print("----------------------------------")
-    print("IP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:")
-    print("----------------------------------")
-    print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
-    print("[2] Check All Packets - Src IP")
-    print("[3] Check All Packets - Dst IP")
-    print("[4] Check First 10 Packets - Src IP")
-    print("[5] Check First 10 Packets - Dst IP")
-    print("[6] Check Last 10 Packets - Src IP")
-    print("[7] Check Last 10 Packets - Dst IP")
-    print("[9] Main Menu")
-    print("[0] Exit")
-    print("----------------------------------")
-
-    sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
-
-    
-def srcportmenu():
-    print("----------------------------------")
-    print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-    print("----------------------------------")
-    print("[1] Check all Packets")
-    print("[2] Check First 20 Packets")
-    print("[3] Check First {insert} Packets")
-    print("[4] Check Last 20 Packets")
-    print("[5] Check Last {insert} Packets")
-    print("[6] ")
-    print("[9] Main Menu")
-    print("[0] Exit")
-    print("----------------------------------")
-
-    srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-
-def dstportmenu():
-    print("----------------------------------")
-    print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-    print("----------------------------------")
-    print("[1] Check all Packets")
-    print("[2] Check First 20 Packets")
-    print("[3] Check First {insert} Packets")
-    print("[4] Check Last 20 Packets")
-    print("[5] Check Last {insert} Packets")
-    print("[6] ")
-    print("[9] Main Menu")
-    print("[0] Exit")
-    print("----------------------------------")
-
-    dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
-
     
     
     
@@ -130,20 +79,18 @@ def dstportmenu():
     
 def option1():
     print("----------------------------------")
-    print("PARSE: What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports / Dst Ports / Info]")
+    print("\033[91mPARSE:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
     print("----------------------------------")
-    print("[1] Conversations and IPs")
-    print("[2] Src IP")
-    print("[3] Dst IP")
-    print("[4] Protocols")
-    print("[5] Src Ports")
-    print("[6] Dst Ports")
-    print("[7] Info")
+    print("[1] \033[92mConversations and IPs\033[0m")
+    print("[2] Protocols")
+    print("[3] \033[34mSrc Ports\033[0m")
+    print("[4] \033[33mDst Ports\033[0m")
+    print("[5] Info")
     print("[9] Main Menu")
     print("----------------------------------")
 
 
-    parseoption=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n")) 
+    parseoption=int(input("\n\033[91mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
         ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
 
     if parseoption ==1:
@@ -163,26 +110,25 @@ def option1():
             os.system("tail " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
         def sdip9():
             mainmenu()
-            option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
         def sdipexit():
-            print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+            print(f'\n\033[36mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
             os._exit(0)
         while True:
             print("----------------------------------")
-            print("IP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:")
+            print("\033[92mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:\033[0m")
             print("----------------------------------")
             print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
-            print("[2] Check All Packets - Src IP")
-            print("[3] Check All Packets - Dst IP")
-            print("[4] Check First 10 Packets - Src IP")
-            print("[5] Check First 10 Packets - Dst IP")
-            print("[6] Check Last 10 Packets - Src IP")
-            print("[7] Check Last 10 Packets - Dst IP")
+            print("[2] Check All Packets - \033[34mSrc IP\033[0m")
+            print("[3] Check All Packets - \033[33mDst IP\033[0m")
+            print("[4] Check First 10 Packets - \033[34mSrc IP\033[0m")
+            print("[5] Check First 10 Packets - \033[33mDst IP\033[0m")
+            print("[6] Check Last 10 Packets - \033[34mSrc IP\033[0m")
+            print("[7] Check Last 10 Packets - \033[33mDst IP\033[0m")
             print("[9] Main Menu")
             print("[0] Exit")
             print("----------------------------------")
 
-            sdipoption=int(input("\nI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\n"))
+            sdipoption=int(input("\n\033[92mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\033[0m\n"))
 
             if sdipoption ==1:
                 sdip1()
@@ -203,113 +149,108 @@ def option1():
             elif sdipoption ==0:
                 sdipexit()
             else:
-                print(f'\nNever fear, we can have another try! Choose wisely...')
+                print(f'\n\033[31mNever fear, we can have another try! Choose wisely...\033[0m')
                 convoipmenu()
                 
-
+    elif parseoption == 2:
+        def sip1():
+            os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
 
 
         ### SRC PORT PARSING MENU ###
 
 
 
-    elif parseoption == 5:
+    elif parseoption == 3:
         def srcport1():
             os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
         def srcport2():
-            os.system("head -n 20 " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
-        def srcport4():
-            os.system("tail -n 20 " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
+            os.system("head " + filename + " | awk '{print $6}' ")
+        def srcport3():
+            os.system("tail " + filename + " | awk '{print $6}' ")
         def srcport9():
             mainmenu()
-            option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
         def srcportexit():
-            print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+            print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
             os._exit(0)
         while True:
             print("----------------------------------")
-            print("SRC PORTS: This menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
+            print("\033[94mSRC PORTS: \033[0mThis menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\033[0m\n")
             print("----------------------------------")
             print("[1] Check all Packets")
-            print("[2] Check First 20 Packets")
-            print("[3] Check First {insert} Packets")
-            print("[4] Check Last 20 Packets")
-            print("[5] Check Last {insert} Packets")
+            print("[2] Check First 10 Packets")
+            print("[3] Check Last 10 Packets")
             print("[6] ")
             print("[9] Main Menu")
             print("[0] Exit")
             print("----------------------------------")
 
-            srcportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+            srcportoption=int(input("\n\033[94mTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\033[0m\n"))
 
             if srcportoption ==1:
                 srcport1()
             elif srcportoption ==2:
                 srcport2()
-            elif srcportoption ==4:
-                srcport4()
+            elif srcportoption ==3:
+                srcport3()
             elif srcportoption ==9:
                 srcport9()
             elif srcportoption ==0:
                 srcportexit()
             else:
-                print(f'\nErmahgerd! Let us try, try again!')
+                print(f'\n\033[31mErmahgerd! Let us try, try again!\033[0m')
 
         ### DST PORT MENU ###
 
 
-    elif parseoption ==6:
+    elif parseoption ==4:
         def dstport1():
             os.system("cat " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
         def dstport2():     
-            os.system("head -n 20  " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
-        def dstport4():
-            os.system("tail -n 20 " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
+            os.system("head " + filename + " | awk '{print $7}' ")
+        def dstport3():
+            os.system("tail " + filename + " | awk '{print $7}' ")
         def dstport9():
             mainmenu()
-            option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! "))
         def dstportexit():
-            print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+            print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
             os._exit(0)  
 
         while True:
             print("----------------------------------")
-            print("DST PORTS: This menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
+            print("\033[93mDST PORTS: \033[0mThis menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
             print("----------------------------------")
             print("[1] Check all Packets")
-            print("[2] Check First 20 Packets")
-            print("[3] Check First {insert} Packets")
-            print("[4] Check Last 20 Packets")
-            print("[5] Check Last {insert} Packets")
+            print("[2] Check First 10 Packets")
+            print("[3] Check Last 10 Packets")
             print("[6] ")
             print("[9] Main Menu")
             print("[0] Exit")
             print("----------------------------------")
 
-            dstportoption=int(input("\nTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\n"))
+            dstportoption=int(input("\n\033[93mTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\033[0m\n"))
 
             if dstportoption ==1:
                 dstport1()
             elif dstportoption ==2:
                 dstport2()
-            elif dstportoption ==4:
-                dstport4()
+            elif dstportoption ==3:
+                dstport3()
             elif dstportoption ==9:
                 dstport9()
             elif dstportoption ==0:
                 dstportexit()
             else:
-                print(f'\nOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.')
+                print(f'\n\033[31mOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.\033[0m')
 
 
     elif parseoption ==9:
         mainmenu()
-        option=int(input("\nWhat are you looking for / looking to do? Type just the number to select the option! \n"))
     elif parseoption ==0:
-        print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+        print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
         os._exit(0)
     else:
-        print(f'\nOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\n')
+        print(f'\n\033[31mOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\033[0m\n')
         option1()
 
 
@@ -377,25 +318,30 @@ def option3():
     for port, count in portcnt1.most_common():
         porttablemost.add_row([port, count])
     print(porttablemost[0])
-    print(f'\nYour most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]}\n')
+    print(f'\n\033[33mYour most frequent source and destination IP, as well as their frequency are Source:\n {srctablemost[0]} \n and Destination: \n{dsttablemost[0]} \033[0m\n')
     mainmenu()
 
 def option4():
-    for pkt in packets:
-        if TCP in pkt:
-            if pkt[TCP].dport == 80:
-                print('Src IP: ', pkt[IP].src)
-                print('Src Port: ' pkt[IP].sport)
-                print('Dst IP: ', pkt[IP].dst)
-                print('Dst Port: ', pkt[IP].dport
-                print('Packet Data: ', pkt[TCP].load.decode("utf-8"))
+    packets1=rdpcap(input("\n\033[93mIt has been a little bit! Remind me again of your pcap file?\033[0m\n"))
+    packetnumber = 1
+    for packet in packets1:
+        if 'TCP' in packet:
+            if packet[TCP].dport == 80:
+                print('\033[35mTime: \033[0m', packet.time)
+                print('\033[34mSrc IP:\033[0m ', packet[IP].src)
+                print('\033[34mSrc Port:\033[0m ', packet[TCP].sport)
+                print('\033[33mDst IP: \033[0m', packet[IP].dst)
+                print('\033[33mDst Port: \033[0m', packet[TCP].dport)
+                
+                if Raw in packet:
+                    print('\033[31mPacket Data: \033[0m', str(packet[Raw].load))
                 print('---')
             else:
-                print('OK')
+                continue
         
           
 def exit():
-    print(f'\nAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+    print(f'\n\033[96mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
     os._exit(0)
    
 
