@@ -79,18 +79,18 @@ def mainmenu():
     
 def option1():
     print("----------------------------------")
-    print("\033[91mPARSE:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
+    print("\033[9mPARSE:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
     print("----------------------------------")
-    print("[1] \033[92mConversations and IPs\033[0m")
-    print("[2] Protocols")
-    print("[3] \033[34mSrc Ports\033[0m")
-    print("[4] \033[33mDst Ports\033[0m")
+    print("[1] \033[212mConversations and IPs\033[0m")
+    print("[2] \033\12mProtocols\033/0m")
+    print("[3] \033[94mSrc Ports\033[0m")
+    print("[4] \033[93mDst Ports\033[0m")
     print("[5] Info")
     print("[9] Main Menu")
     print("----------------------------------")
 
 
-    parseoption=int(input("\n\033[91mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
+    parseoption=int(input("\n\033[9mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
         ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
 
     if parseoption ==1:
@@ -115,7 +115,7 @@ def option1():
             os._exit(0)
         while True:
             print("----------------------------------")
-            print("\033[92mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:\033[0m")
+            print("\033[212mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:\033[0m")
             print("----------------------------------")
             print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
             print("[2] Check All Packets - \033[34mSrc IP\033[0m")
@@ -128,7 +128,7 @@ def option1():
             print("[0] Exit")
             print("----------------------------------")
 
-            sdipoption=int(input("\n\033[92mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\033[0m\n"))
+            sdipoption=int(input("\n\033[212mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\033[0m\n"))
 
             if sdipoption ==1:
                 sdip1()
@@ -153,15 +153,8 @@ def option1():
                 convoipmenu()
                 
     elif parseoption == 2:
-        protocols = set()
-        for pkt in pcap:
-            protocol = pkt.name
-            protocols.add(protocol)
-            if protocol in protocols:
-                print(protocol)
-            else:
-                continue
-            mainmenu()
+        os.system("cat " + filename + " | awk '{print $5}' | sort | uniq -c | sort -nr")
+        mainmenu()
             
 
 
