@@ -243,23 +243,22 @@ def option1():
 
     elif parseoption ==5:
         def parseoption5():
-            packets1=rdpcap(input("\n\033[38;5;196mIt has been a little bit! Remind me again of your pcap file?\033[0m\n"))
-            packetnumber = 1
-            for packet in packets1:
-                if 'TCP' in packet:
-                    if packet[TCP].dport == 80:
-                        print('\033[35mTime: \033[0m', packet.time)
-                        print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
-                        print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
-                        print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
-                        print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
+        packets1=rdpcap(input("\n\033[33mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
+        packetnumber = 1
+        for packet in packets1:
+            if 'TCP' in packet:
+                if packet[TCP].dport == 80:
+                    print('\033[35mTime: \033[0m', packet.time)
+                    print('\033[34mSrc IP:\033[0m ', packet[IP].src)
+                    print('\033[34mSrc Port:\033[0m ', packet[TCP].sport)
+                    print('\033[33mDst IP: \033[0m', packet[IP].dst)
+                    print('\033[33mDst Port: \033[0m', packet[TCP].dport)
 
-                        if Raw in packet:
-                            print('\033[38;5;196mPacket Data: \033[0m', str(packet[Raw].load))
-                        print('---')
-                    else:
-                        continue
-                    mainmenu()
+                    if Raw in packet:
+                        print('\033[31mPacket Data: \033[0m', str(packet[Raw].load))
+                    print('---')
+                else:
+                    continue
 
                 
     elif parseoption ==9:
