@@ -331,18 +331,17 @@ def option4():
     for packet in packets1:
         if 'TCP' in packet:
             if packet[TCP].dport == 80:
-                print('\033[35mTime: \033[0m', packet.time)
-                print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
-                print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
-                print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
-                print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
-                
                 if Raw in packet:
+                    print('\033[35mTime: \033[0m', packet.time)
+                    print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
+                    print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
+                    print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
+                    print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
                     print('\033[38;5;196mPacket Data: \033[0m', str(packet[Raw].load))
-                print('---')
-            else:
-                continue
-
+                    print('---')   
+                else:
+                    continue
+    mainmenu()
                 
 ### MAIN MENU - EXIT ###
 
