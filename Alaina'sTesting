@@ -153,8 +153,16 @@ def option1():
                 convoipmenu()
                 
     elif parseoption == 2:
-        def sip1():
-            os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+        protocols = set()
+        for pkt in pcap:
+            protocol = pkt.name
+            protocols.add(protocol)
+            if protocol in protocols:
+                print(protocol)
+            else:
+                continue
+            mainmenu()
+            
 
 
         ### SRC PORT PARSING MENU ###
