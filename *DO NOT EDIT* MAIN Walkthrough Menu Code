@@ -117,7 +117,7 @@ def intro():
                         os._exit(0)
                     while True:
                         print("----------------------------------")
-                        print("\033[38;5;212mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. \nSelect an option, with the number, below:\033[0m")
+                        print("\033[38;5;212mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. Select an option, with the number, below:\033[0m")
                         print("----------------------------------")
                         print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
                         print("[2] Check All Packets - \033[34mSrc IP\033[0m")
