@@ -102,6 +102,7 @@ def option1():
     print("[3] \033[38;5;51mSrc Ports\033[0m")
     print("[4] \033[38;5;228mDst Ports\033[0m")
     print("[9] \033[96mMain Menu\033[0m")
+    print("[0] Exit")
     print("----------------------------------")
 
 
