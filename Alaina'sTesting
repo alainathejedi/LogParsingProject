@@ -72,8 +72,6 @@ def intro():
 
         option=int(input("\n\033[38;5;156mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
 
-
-        
         ### MAIN MENU 1 - PARSING ###    
 
         while option !=8:
@@ -373,30 +371,23 @@ def intro():
                 option4()
             elif option ==5:
                 option5()
-            elif option ==8:
-                option8()
             elif option ==0:
                 exit()
             else:
                 print("\033[31mInvalid choice, try again.\033[0m")
                 mainmenu()
 
-    if option ==8:
-        response=input("Would you like to parse through another pcap file? Type 1 for YES and 2 for NO")
-        if response ==1:
-            intro()
-            mainmenu()
-        elif response ==2:
-            mainmenu()
-        else:
-            print("Oh schucks. It looks like that wasn't a valid option! Let us start again!")
+        if option ==8:
+            response=input("Would you like to parse through another pcap file? Type Y for YES and N for NO")
+            if response.lower() =='y':
+                intro()
+                mainmenu()
+            elif response.lower() =='n':
+                mainmenu()
+            else:
+                print("Oh schucks. It looks like that wasn't a valid option! Let us start again!")
 
 
     ### MAIN MENU - EXIT ###
-
-
-    
-
-
-
+    mainmenu()
 intro()
