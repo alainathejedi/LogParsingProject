@@ -117,7 +117,7 @@ def intro():
                         os._exit(0)
                     while True:
                         print("----------------------------------")
-                        print("\033[38;5;212mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. Select an option, with the number, below:\033[0m")
+                        print("\033[38;5;212mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. Select an option, with the number, and type it below: \033[0m")
                         print("----------------------------------")
                         print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
                         print("[2] Check All Packets - \033[34mSrc IP\033[0m")
@@ -130,7 +130,7 @@ def intro():
                         print("[0] Exit")
                         print("----------------------------------")
 
-                        sdipoption=int(input("\n\033[38;5;212mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking to do?\n Choose an option below:\033[0m\n"))
+                        sdipoption=int(input("\n\033[38;5;212mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking for?: \n\033[0m\n"))
 
                         if sdipoption ==1:
                             sdip1()
