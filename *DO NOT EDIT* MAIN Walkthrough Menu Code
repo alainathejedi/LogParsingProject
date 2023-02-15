@@ -345,7 +345,8 @@ def option3():
 
 
 def option4():
-    packets1=rdpcap(input("\n\033[38;5;202mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
+#    packets1=rdpcap(input("\n\033[38;5;202mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
+    packets1=pcap
     packetnumber = 1
     for packet in packets1:
         if 'TCP' in packet:
@@ -361,7 +362,8 @@ def option4():
     mainmenu()
 
 def option5():
-    packets2 = rdpcap(input("\n\033[38;5;211mWith all this log hunting, I'm a little Parsed! (Ha)...What is your pcap file again?:\033[0m\n"))
+   # packets2 = rdpcap(input("\n\033[38;5;211mWith all this log hunting, I'm a little Parsed! (Ha)...What is your pcap file again?:\033[0m\n"))
+    packets2=pcap
     for packet in packets2:
         if packet.haslayer(TCP) and packet.haslayer(Raw):
             payload = packet[Raw].load.decode("utf-8", "ignore")
