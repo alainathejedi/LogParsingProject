@@ -355,7 +355,7 @@ def intro():
                                     print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
                                     print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
                                     print('\033[38;5;202mPacket Data: \033[0m', str(packet[Raw].load))
-                                    print('---')
+                                    print('------------------------------------------------')
                                 
                 elif grepoption ==2:
                      stringsearch=input("\n\033[38;5;202mWhat is the string that you want to search for?\033[0m")
@@ -371,7 +371,7 @@ def intro():
                                          print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
                                          print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
                                          print('\033[38;5;202mPacket Data: \033[0m', str(packet[Raw].load))
-                                         print('---')
+                                         print('------------------------------------------------')
                                     
                 elif grepoption ==9:
                     mainmenu()
@@ -413,9 +413,9 @@ def intro():
                             payload2 = packet[Raw].load.decode("utf-8", "ignore")
                             if "HTTP" in payload2:
                                 if stringsearch2.lower() in payload2.lower():
-                                    print("\033[38;5;211m------------------------------------------------\033[0m")
+                                    print("\033[38;5;221m------------------------------------------------\033[0m")
                                     print(payload2)
-                                    print("\033[38;5;211m------------------------------------------------\033[0m")
+                                    print("\033[38;5;221m------------------------------------------------\033[0m")
                 elif grepoption2 ==9:
                     mainmenu()
                 elif grepoption2==0:
