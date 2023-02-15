@@ -360,7 +360,7 @@ def option4():
     mainmenu()
 
 def option5():
-    packets2 = rdpcap(input("\033[38;5;211mWith all this log hunting, I'm a little Parsed! (Ha)...What is your pcap file again?\033[0m"))
+    packets2 = rdpcap(input("\n\033[38;5;211mWith all this log hunting, I'm a little Parsed! (Ha)...What is your pcap file again?:\033[0m\n"))
     for packet in packets2:
         if packet.haslayer(TCP) and packet.haslayer(Raw):
             payload = packet[Raw].load.decode("utf-8", "ignore")
