@@ -117,7 +117,7 @@ def intro():
                         os._exit(0)
                     while True:
                         print("----------------------------------")
-                        print("\033[38;5;212mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. Select an option, with the number, and type it below: \033[0m")
+                        print("\033[38;5;212mIP MENU:\033[0m Here, you can parse for the Src IP and Dst IP from the Log file. Select an option, with the number, and type it below: ")
                         print("----------------------------------")
                         print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
                         print("[2] Check All Packets - \033[34mSrc IP\033[0m")
@@ -342,7 +342,7 @@ def intro():
                 print("----------------------------------")
 
 
-                grepoption=int(input("\nWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\n"))
+                grepoption=int(input("\n\033[38;5;202mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
 
 
                 if grepoption ==1:
@@ -362,12 +362,12 @@ def intro():
     #                searchstring=input("\nWhat string would you like to search for? Please type it here, and it will search the file and print pertinent information: \n")
      #               searchcol=input("\nWhat Column? Time (1) | Frame (2) | Src IP (3) | Dst IP (4) | Protocol (5) | Src Port (6) | Dst Port (7) | File Data (8): \n"
       #              os.system("awk -F'\t' -v column=\"$searchcol\" -v value=\"$searchstring\" '$column == value { print }' $filename")
-                     stringsearch=input("What is the string that you want to search for?")
+                     stringsearch=input("\033[38;5;202mWhat is the string that you want to search for?\033[0m\n").lower()
                      for packet in packets1:
                          if 'TCP' in packet:
                              if packet[TCP].dport == 80:
                                  if Raw in packet:
-                                     rawdata = str(packet[Raw])
+                                     rawdata = str(packet[Raw]).lower()
                                      if stringsearch in rawdata:
                                          print('\033[35mTime: \033[0m', packet.time)
                                          print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
@@ -390,7 +390,7 @@ def intro():
             def option5():
                 packets2=pcap
                 print("----------------------------------")
-                print("\033[38;5;202mHTTP Response and Requests:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
+                print("\033[38;5;221mHTTP Response and Requests:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
                 print("----------------------------------")
                 print("[1] Output all Response and Request Data")
                 print("[2] Look for Strings")
@@ -399,7 +399,7 @@ def intro():
                 print("----------------------------------")
 
 
-                grepoption2=int(input("\nWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\n"))
+                grepoption2=int(input("\n\033[38;5;221mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
 
 
                 if grepoption2 ==1:
@@ -411,11 +411,11 @@ def intro():
                                 print(payload)
                                 print("\033[38;5;211m------------------------------------------------\033[0m")
                 elif grepoption ==2:
-                    stringsearch2=input("What is the string that you want to search for?")
+                    stringsearch2=input("\n\033[38;5;221mWhat is the string that you want to search for?\033[0m\n").lower()
                     for packet in packets2:
                         if packet.haslayer(TCP) and packet.haslayer(Raw):
                             rawdata2=str(packet[Raw])
-                            payload = packet[Raw].load.decode("utf-8", "ignore")
+                            payload = packet[Raw].load.decode("utf-8", "ignore").lower()
                             if "HTTP" in payload and if rawdata2 in payload:
                                 print("\033[38;5;211m------------------------------------------------\033[0m")
                                 print(payload)
