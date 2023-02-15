@@ -69,9 +69,13 @@ def intro():
         print("[8] Reset the Program for New File")
         print("[0] Exit")
         print("----------------------------------")
-
-        option=int(input("\n\033[38;5;156mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
-
+        
+        while True:
+            try:
+                option=int(input("\n\033[38;5;156mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
+                break
+            except ValueError:
+                print("Ope! Let's try again, that didn't feel right!")
         ### MAIN MENU 1 - PARSING ###    
 
         while option !=8:
@@ -88,9 +92,13 @@ def intro():
                 print("[0] Exit")
                 print("----------------------------------")
 
-
-                parseoption=int(input("\n\033[38;5;202mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
-
+                while True:
+                    try:
+                        parseoption=int(input("\n\033[38;5;202mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
+                        break
+                    except ValueError:
+                        print("Ope! Let's try again, that didn't feel right!")
+                        
 
                 ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
 
@@ -126,11 +134,17 @@ def intro():
                         print("[5] Check First 10 Packets - \033[33mDst IP\033[0m")
                         print("[6] Check Last 10 Packets - \033[34mSrc IP\033[0m")
                         print("[7] Check Last 10 Packets - \033[33mDst IP\033[0m")
-                        print("[9] Main Menu")
+                        print("[8] Back to 033[38;5;202mParse:\033[0m Menu (Previous Menu)")
+                        print("[9] \033[38;5;156mMain Menu\033[0m")
                         print("[0] Exit")
                         print("----------------------------------")
 
-                        sdipoption=int(input("\n\033[38;5;212mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking for?: \n\033[0m\n"))
+                        while True:
+                            try:
+                                sdipoption=int(input("\n\033[38;5;212mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking for?: \n\033[0m\n"))
+                                break
+                            except ValueError:
+                                print("Ope! Let's try again, that didn't feel right!")
 
                         if sdipoption ==1:
                             sdip1()
@@ -148,105 +162,35 @@ def intro():
                             sdip7()
                         elif sdipoption ==9:
                             sdip9()
+                        elif sdipoption ==8:
+                            option1()
                         elif sdipoption ==0:
                             sdipexit()
                         else:
                             print(f'\n\033[31mNever fear, we can have another try! Choose wisely...\033[0m')
-                            convoipmenu()
+                      
 
                 elif parseoption == 2:
                     os.system("cat " + filename + " | awk '{print $5}' | sort | uniq -c | sort -nr")
-                    mainmenu()
+                    option1()
 
 
-
-                ### SRC PORT PARSING MENU ###
+### SRC PORT PARSING MENU ###
 
 
 
                 elif parseoption == 3:
-                    def srcport1():
-                        os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
-                    def srcport2():
-                        os.system("head " + filename + " | awk '{print $6}' ")
-                    def srcport3():
-                        os.system("tail " + filename + " | awk '{print $6}' ")
-                    def srcport9():
-                        mainmenu()
-                    def srcportexit():
-                        print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
-                        os._exit(0)
-                    while True:
-                        print("----------------------------------")
-                        print("\033[38;5;51mSRC PORTS: \033[0mThis menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\033[0m\n")
-                        print("----------------------------------")
-                        print("[1] Check all Packets")
-                        print("[2] Check First 10 Packets")
-                        print("[3] Check Last 10 Packets")
-                        print("[6] ")
-                        print("[9] Main Menu")
-                        print("[0] Exit")
-                        print("----------------------------------")
-
-                        srcportoption=int(input("\n\033[38;5;51mTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\033[0m\n"))
-
-                        if srcportoption ==1:
-                            srcport1()
-                        elif srcportoption ==2:
-                            srcport2()
-                        elif srcportoption ==3:
-                            srcport3()
-                        elif srcportoption ==9:
-                            srcport9()
-                        elif srcportoption ==0:
-                            srcportexit()
-                        else:
-                            print(f'\n\033[31mErmahgerd! Let us try, try again!\033[0m')
-
-                ### DST PORT MENU ###
+                    os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
+                    option1()
+                    
+                    
+### DST PORT MENU ###
 
 
                 elif parseoption ==4:
-                    def dstport1():
-                        os.system("cat " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
-                    def dstport2():     
-                        os.system("head " + filename + " | awk '{print $7}' ")
-                    def dstport3():
-                        os.system("tail " + filename + " | awk '{print $7}' ")
-                    def dstport9():
-                        mainmenu()
-                    def dstportexit():
-                        print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
-                        os._exit(0)  
-
-                    while True:
-                        print("----------------------------------")
-                        print("\033[38;5;228mDST PORTS: \033[0mThis menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-                        print("----------------------------------")
-                        print("[1] Check all Packets")
-                        print("[2] Check First 10 Packets")
-                        print("[3] Check Last 10 Packets")
-                        print("[6] ")
-                        print("[9] Main Menu")
-                        print("[0] Exit")
-                        print("----------------------------------")
-
-                        dstportoption=int(input("\n\033[38;5;228mTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\033[0m\n"))
-
-                        if dstportoption ==1:
-                            dstport1()
-                        elif dstportoption ==2:
-                            dstport2()
-                        elif dstportoption ==3:
-                            dstport3()
-                        elif dstportoption ==9:
-                            dstport9()
-                        elif dstportoption ==0:
-                            dstportexit()
-                        else:
-                            print(f'\n\033[31mOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.\033[0m')
-
-
+                    os.system("cat " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
+                    option1()
+                    
                 elif parseoption ==9:
                     mainmenu()
                 elif parseoption ==0:
@@ -258,7 +202,7 @@ def intro():
 
 
 
-        ### MAIN MENU 2 - FREQUENCY TABLES ###
+### MAIN MENU 2 - FREQUENCY TABLES ###
 
             def option2():
                 cnt= Counter()
@@ -293,7 +237,7 @@ def intro():
                 mainmenu()
 
 
-            ### MAIN MENU 3 - MOST COMMON ###
+### MAIN MENU 3 - MOST COMMON ###
 
             def option3():
                 cnt1= Counter()
@@ -323,38 +267,112 @@ def intro():
                 mainmenu()
 
 
-
-            ### MAIN MENU 4 - HTTP INFO ###
+### MAIN MENU 4 - HTTP INFO ###
 
 
             def option4():
-            #    packets1=rdpcap(input("\n\033[38;5;202mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
                 packets1=pcap
-                packetnumber = 1
-                for packet in packets1:
-                    if 'TCP' in packet:
-                        if packet[TCP].dport == 80:
-                            if Raw in packet:
-                                print('\033[35mTime: \033[0m', packet.time)
-                                print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
-                                print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
-                                print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
-                                print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
-                                print('\033[38;5;202mPacket Data: \033[0m', str(packet[Raw].load))
-                                print('---')   
-                mainmenu()
+   
+                print("----------------------------------")
+                print("\033[38;5;202mHTTP GET Information:\033[0m What is it you're looking for in the pcap file?")
+                print("----------------------------------")
+                print("[1] Output all HTTP GET Data")
+                print("[2] Look for Strings")
+                print("[9] Main Menu")
+                print("[0] Exit")
+                print("----------------------------------")
+
+                while True:
+                    try:
+                        grepoption=int(input("\n\033[38;5;202mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
+                        break
+                    except ValueError:
+                        print("Ope! Let's try again, that didn't feel right!")
+
+
+                if grepoption ==1:
+                    for packet in packets1:
+                        if 'TCP' in packet:
+                            if packet[TCP].dport == 80:
+                                if Raw in packet:
+                                    print('\033[35mTime: \033[0m', packet.time)
+                                    print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
+                                    print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
+                                    print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
+                                    print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
+                                    print('\033[38;5;202mPacket Data: \033[0m', str(packet[Raw].load))
+                                    print('------------------------------------------------')
+                                
+                elif grepoption ==2:
+                     stringsearch=input("\n\033[38;5;202mWhat is the string that you want to search for?\033[0m\n")
+                     for packet in packets1:
+                         if 'TCP' in packet:
+                             if packet[TCP].dport == 80:
+                                 if Raw in packet:
+                                     rawdata = str(packet[Raw])
+                                     if stringsearch.lower() in rawdata.lower():
+                                         print('\033[35mTime: \033[0m', packet.time)
+                                         print('\033[38;5;51mSrc IP:\033[0m ', packet[IP].src)
+                                         print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
+                                         print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
+                                         print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
+                                         print('\033[38;5;202mPacket Data: \033[0m', str(packet[Raw].load))
+                                         print('------------------------------------------------')
+                                    
+                elif grepoption ==9:
+                    mainmenu()
+                elif grepoption==0:
+                    print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                    os._exit(0) 
+                else:
+                    print(f'\n\033[31mErmahgerd! Let us try, try again!\033[0m')
+                                  
+                                       
 
             def option5():
-               # packets2 = rdpcap(input("\n\033[38;5;211mWith all this log hunting, I'm a little Parsed! (Ha)...What is your pcap file again?:\033[0m\n"))
                 packets2=pcap
-                for packet in packets2:
-                    if packet.haslayer(TCP) and packet.haslayer(Raw):
-                        payload = packet[Raw].load.decode("utf-8", "ignore")
-                        if "HTTP" in payload:
-                            print("\033[38;5;211m------------------------------------------------\033[0m")
-                            print(payload)
-                            print("\033[38;5;211m------------------------------------------------\033[0m")
-                mainmenu()
+                print("----------------------------------")
+                print("\033[38;5;221mHTTP Response and Requests:\033[0m What is it you're looking for in the pcap file? ")
+                print("----------------------------------")
+                print("[1] Output all Response and Request Data")
+                print("[2] Look for Strings")
+                print("[9] Main Menu")
+                print("[0] Exit")
+                print("----------------------------------")
+
+                while True:
+                    try:
+                        grepoption2=int(input("\n\033[38;5;221mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
+                        break
+                    except ValueError:
+                        print("Ope! Let's try again, that didn't feel right!")
+
+
+                if grepoption2 ==1:
+                    for packet in packets2:
+                        if packet.haslayer(TCP) and packet.haslayer(Raw):
+                            payload = packet[Raw].load.decode("utf-8", "ignore")
+                            if "HTTP" in payload:
+                                print("\033[38;5;221m------------------------------------------------\033[0m")
+                                print(payload)
+                                print("\033[38;5;221m------------------------------------------------\033[0m")
+                elif grepoption2 ==2:
+                    stringsearch2=input("\n\033[38;5;221mWhat is the string that you want to search for?\033[0m\n")
+                    for packet in packets2:
+                        if packet.haslayer(TCP) and packet.haslayer(Raw):
+                            payload2 = packet[Raw].load.decode("utf-8", "ignore")
+                            if "HTTP" in payload2:
+                                if stringsearch2.lower() in payload2.lower():
+                                    print("\033[38;5;221m------------------------------------------------\033[0m")
+                                    print(payload2)
+                                    print("\033[38;5;221m------------------------------------------------\033[0m")
+                elif grepoption2 ==9:
+                    mainmenu()
+                elif grepoption2==0:
+                    print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                    os._exit(0) 
+                else:
+                    print(f'\n\033[31mErmahgerd we made a DERP! Let us try, try again!\033[0m')
 
 
             def exit():
@@ -386,8 +404,8 @@ def intro():
                 mainmenu()
             else:
                 print("\n\033[31mOh schucks. It looks like that wasn't a valid option! Let us start again!\033[0m")
+                mainmenu()
 
 
-    ### MAIN MENU - EXIT ###
     mainmenu()
 intro()
