@@ -3,7 +3,7 @@ import os
 from scapy.all import *
 from prettytable import PrettyTable
 from collections import Counter
-import pyfiglet
+import pyfiglet 
 from termcolor import colored
 
 
@@ -49,11 +49,11 @@ os.system("head -n 30 " + filename)
 
 #os.system("figlet -c -f big Team L.L.A.M.A.")
 text = "Project L.L.A.M.A."
-asciitext=figlet.format(text, font ='big')
-coloredtext= colored(asciitext, 'cyan')
+asciitext=pyfiglet.figlet_format(text, font ='big')
+coloredtext= colored(asciitext, 'cyan', attrs=["bold"])
 print(coloredtext)
 print(f'\033[38;5;156mLog Lollygagging with Almir, Misheon, and Alaina the Jedi\033[0m\n')
-print(f'\n\n\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m\n\n')
+print(f'\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m')
 
 
 ### MAIN MENU FUNCTION ###
@@ -77,6 +77,8 @@ def mainmenu():
         option2()
     elif option ==3:
         option3()
+    elif option ==4:
+        option4()
     elif option ==0:
         exit()
     else:
@@ -354,6 +356,11 @@ def option4():
                     print('---')   
                 else:
                     continue
+            elif packet.haslayer(TCP) and packet.haslayer(Raw):
+                payload = packet[Raw].load.decode("utf-8", "ignore")
+                if "HTTP" in payload:
+                    http_request = payload.split("\r\n")[0].split(" ")[0]
+                    print(f"HTTP request type: {http_request}")
     mainmenu()
                 
 ### MAIN MENU - EXIT ###
