@@ -65,7 +65,8 @@ def mainmenu():
     print("[1] Parse the File")
     print("[2] Frequency Tables")
     print("[3] Most Common IP/Port")
-    print("[4] HTTP Data")
+    print("[4] HTTP GET Request Data")
+    print("[5] All HTTP Requests and Responses")
     print("[0] Exit")
     print("----------------------------------")
     
@@ -79,6 +80,8 @@ def mainmenu():
         option3()
     elif option ==4:
         option4()
+    elif option ==5:
+        option5()
     elif option ==0:
         exit()
     else:
@@ -341,7 +344,7 @@ def option3():
 
 
 def option4():
-    packets1=rdpcap(input("\n\033[38;5;196mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
+    packets1=rdpcap(input("\n\033[38;5;202mIt has been a little bit! Remind me again of your pcap file?\033[0m"))
     packetnumber = 1
     for packet in packets1:
         if 'TCP' in packet:
@@ -352,10 +355,19 @@ def option4():
                     print('\033[38;5;51mSrc Port:\033[0m ', packet[TCP].sport)
                     print('\033[38;5;228mDst IP: \033[0m', packet[IP].dst)
                     print('\033[38;5;228mDst Port: \033[0m', packet[TCP].dport)
-                    print('\033[38;5;196mPacket Data: \033[0m', str(packet[Raw].load))
+                    print('\033[38;5;202mPacket Data: \033[0m', str(packet[Raw].load))
                     print('---')   
-                else:
-                    continue
+    mainmenu()
+
+def option5():
+    packets2 = rdpcap(input("\033[38;5;211mWith all this log hunting, I'm a little Parsed! (Ha)...What is your pcap file again?\033[0m"))
+    for packet in packets2:
+        if packet.haslayer(TCP) and packet.haslayer(Raw):
+            payload = packet[Raw].load.decode("utf-8", "ignore")
+            if "HTTP" in payload:
+                print("\033[38;5;211m------------------------------------------------\033[0m")
+                print(payload)
+                print("\033[38;5;211m------------------------------------------------\033[0m")
     mainmenu()
                 
 ### MAIN MENU - EXIT ###
