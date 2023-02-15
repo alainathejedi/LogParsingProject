@@ -69,9 +69,13 @@ def intro():
         print("[8] Reset the Program for New File")
         print("[0] Exit")
         print("----------------------------------")
-
-        option=int(input("\n\033[38;5;156mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
-
+        
+        while True:
+            try:
+                option=int(input("\n\033[38;5;156mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
+                break
+            except ValueError:
+                print("Ope! Let's try again, that didn't feel right!")
         ### MAIN MENU 1 - PARSING ###    
 
         while option !=8:
@@ -126,8 +130,8 @@ def intro():
                         print("[5] Check First 10 Packets - \033[33mDst IP\033[0m")
                         print("[6] Check Last 10 Packets - \033[34mSrc IP\033[0m")
                         print("[7] Check Last 10 Packets - \033[33mDst IP\033[0m")
-                        print("[8] Back to Parse Menu (Previous Menu)")
-                        print("[9] Main Menu")
+                        print("[8] Back to 033[38;5;202mParse:\033[0m Menu (Previous Menu)")
+                        print("[9] \033[38;5;156mMain Menu\033[0m")
                         print("[0] Exit")
                         print("----------------------------------")
 
@@ -287,7 +291,7 @@ def intro():
                                     print('------------------------------------------------')
                                 
                 elif grepoption ==2:
-                     stringsearch=input("\n\033[38;5;202mWhat is the string that you want to search for?\033[0m")
+                     stringsearch=input("\n\033[38;5;202mWhat is the string that you want to search for?\033[0m\n")
                      for packet in packets1:
                          if 'TCP' in packet:
                              if packet[TCP].dport == 80:
@@ -336,7 +340,7 @@ def intro():
                                 print(payload)
                                 print("\033[38;5;221m------------------------------------------------\033[0m")
                 elif grepoption2 ==2:
-                    stringsearch2=input("\n\033[38;5;221mWhat is the string that you want to search for?\033[0m")
+                    stringsearch2=input("\n\033[38;5;221mWhat is the string that you want to search for?\033[0m\n")
                     for packet in packets2:
                         if packet.haslayer(TCP) and packet.haslayer(Raw):
                             payload2 = packet[Raw].load.decode("utf-8", "ignore")
