@@ -92,9 +92,13 @@ def intro():
                 print("[0] Exit")
                 print("----------------------------------")
 
-
-                parseoption=int(input("\n\033[38;5;202mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
-
+                while True:
+                    try:
+                        parseoption=int(input("\n\033[38;5;202mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
+                        break
+                    except ValueError:
+                        print("Ope! Let's try again, that didn't feel right!")
+                        
 
                 ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
 
@@ -135,7 +139,12 @@ def intro():
                         print("[0] Exit")
                         print("----------------------------------")
 
-                        sdipoption=int(input("\n\033[38;5;212mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking for?: \n\033[0m\n"))
+                        while True:
+                            try:
+                                sdipoption=int(input("\n\033[38;5;212mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking for?: \n\033[0m\n"))
+                                break
+                            except ValueError:
+                                print("Ope! Let's try again, that didn't feel right!")
 
                         if sdipoption ==1:
                             sdip1()
@@ -273,8 +282,12 @@ def intro():
                 print("[0] Exit")
                 print("----------------------------------")
 
-
-                grepoption=int(input("\n\033[38;5;202mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
+                while True:
+                    try:
+                        grepoption=int(input("\n\033[38;5;202mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
+                        break
+                    except ValueError:
+                        print("Ope! Let's try again, that didn't feel right!")
 
 
                 if grepoption ==1:
@@ -327,8 +340,12 @@ def intro():
                 print("[0] Exit")
                 print("----------------------------------")
 
-
-                grepoption2=int(input("\n\033[38;5;221mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
+                while True:
+                    try:
+                        grepoption2=int(input("\n\033[38;5;221mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
+                        break
+                    except ValueError:
+                        print("Ope! Let's try again, that didn't feel right!")
 
 
                 if grepoption2 ==1:
