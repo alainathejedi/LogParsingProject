@@ -126,6 +126,7 @@ def intro():
                         print("[5] Check First 10 Packets - \033[33mDst IP\033[0m")
                         print("[6] Check Last 10 Packets - \033[34mSrc IP\033[0m")
                         print("[7] Check Last 10 Packets - \033[33mDst IP\033[0m")
+                        print("[8] Back to Parse Menu (Previous Menu)")
                         print("[9] Main Menu")
                         print("[0] Exit")
                         print("----------------------------------")
@@ -148,6 +149,8 @@ def intro():
                             sdip7()
                         elif sdipoption ==9:
                             sdip9()
+                        elif sdipoption ==8:
+                            option1()
                         elif sdipoption ==0:
                             sdipexit()
                         else:
@@ -156,98 +159,25 @@ def intro():
 
                 elif parseoption == 2:
                     os.system("cat " + filename + " | awk '{print $5}' | sort | uniq -c | sort -nr")
-                    mainmenu()
+                    option1()
 
 
-
-                ### SRC PORT PARSING MENU ###
+### SRC PORT PARSING MENU ###
 
 
 
                 elif parseoption == 3:
-                    def srcport1():
-                        os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
-                    def srcport2():
-                        os.system("head " + filename + " | awk '{print $6}' ")
-                    def srcport3():
-                        os.system("tail " + filename + " | awk '{print $6}' ")
-                    def srcport9():
-                        mainmenu()
-                    def srcportexit():
-                        print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
-                        os._exit(0)
-                    while True:
-                        print("----------------------------------")
-                        print("\033[38;5;51mSRC PORTS: \033[0mThis menu is for locating the source ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\033[0m\n")
-                        print("----------------------------------")
-                        print("[1] Check all Packets")
-                        print("[2] Check First 10 Packets")
-                        print("[3] Check Last 10 Packets")
-                        print("[6] ")
-                        print("[9] Main Menu")
-                        print("[0] Exit")
-                        print("----------------------------------")
-
-                        srcportoption=int(input("\n\033[38;5;51mTime to check the Src Ports! Based on your choice, the Src Ports will appear in order from most to least frequent. How would you like to check your information?\033[0m\n"))
-
-                        if srcportoption ==1:
-                            srcport1()
-                        elif srcportoption ==2:
-                            srcport2()
-                        elif srcportoption ==3:
-                            srcport3()
-                        elif srcportoption ==9:
-                            srcport9()
-                        elif srcportoption ==0:
-                            srcportexit()
-                        else:
-                            print(f'\n\033[31mErmahgerd! Let us try, try again!\033[0m')
-
-                ### DST PORT MENU ###
+                    os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
+                    option1()
+                    
+                    
+### DST PORT MENU ###
 
 
                 elif parseoption ==4:
-                    def dstport1():
-                        os.system("cat " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
-                    def dstport2():     
-                        os.system("head " + filename + " | awk '{print $7}' ")
-                    def dstport3():
-                        os.system("tail " + filename + " | awk '{print $7}' ")
-                    def dstport9():
-                        mainmenu()
-                    def dstportexit():
-                        print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
-                        os._exit(0)  
-
-                    while True:
-                        print("----------------------------------")
-                        print("\033[38;5;228mDST PORTS: \033[0mThis menu is for locating the destination ports, as well as their frequencies. \nYou are able to check different parts of the logs you choose based on the menu option.\n")
-                        print("----------------------------------")
-                        print("[1] Check all Packets")
-                        print("[2] Check First 10 Packets")
-                        print("[3] Check Last 10 Packets")
-                        print("[6] ")
-                        print("[9] Main Menu")
-                        print("[0] Exit")
-                        print("----------------------------------")
-
-                        dstportoption=int(input("\n\033[38;5;228mTime to check the Dst Ports! Based on your choice, the Dst Ports will appear in order from most to least frequent. How would you like to check your information?\033[0m\n"))
-
-                        if dstportoption ==1:
-                            dstport1()
-                        elif dstportoption ==2:
-                            dstport2()
-                        elif dstportoption ==3:
-                            dstport3()
-                        elif dstportoption ==9:
-                            dstport9()
-                        elif dstportoption ==0:
-                            dstportexit()
-                        else:
-                            print(f'\n\033[31mOpe. What a Midwestern thing to say. You bet-chya! Let us try one more time, friend.\033[0m')
-      
-
-
+                    os.system("cat " + filename + " | awk '{print $7}' | sort | uniq -c | sort -nr")
+                    option1()
+                    
                 elif parseoption ==9:
                     mainmenu()
                 elif parseoption ==0:
@@ -259,7 +189,7 @@ def intro():
 
 
 
-        ### MAIN MENU 2 - FREQUENCY TABLES ###
+### MAIN MENU 2 - FREQUENCY TABLES ###
 
             def option2():
                 cnt= Counter()
@@ -294,7 +224,7 @@ def intro():
                 mainmenu()
 
 
-            ### MAIN MENU 3 - MOST COMMON ###
+### MAIN MENU 3 - MOST COMMON ###
 
             def option3():
                 cnt1= Counter()
@@ -324,8 +254,7 @@ def intro():
                 mainmenu()
 
 
-
-            ### MAIN MENU 4 - HTTP INFO ###
+### MAIN MENU 4 - HTTP INFO ###
 
 
             def option4():
@@ -457,6 +386,5 @@ def intro():
                 mainmenu()
 
 
-    ### MAIN MENU - EXIT ###
     mainmenu()
 intro()
