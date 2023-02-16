@@ -67,7 +67,7 @@ def intro():
     coloredtext= colored(asciitext, 'cyan', attrs=["bold"])
     print(coloredtext)
     print(f'\033[38;5;156mLog Lollygagging with Almir, Misheon, and Alaina the Jedi\033[0m\n')
-    print(f'\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a number of questions, for which you will need to input choices or information pertaining to what you need. The above information is a capture of the pcap you entered! It shows the fields, which are important later.\033[0m')
+    print(f'\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a series of menus to pull out important information you may need from your pcap file. You can look for frequencies, or search for strings in the data itself. Pretty cool, eh? Below is the main menu of items. You can look for certain fields in the file via parse, check frequencies, or look at the HTTP data left beghind!.\033[0m')
 
 ### MAIN MENU FUNCTION ###
 
@@ -75,11 +75,11 @@ def intro():
         print("----------------------------------")
         print("\033[38;5;156m*** MAIN MENU ***\033[0m")
         print("----------------------------------")
-        print("[1] Parse the File")
+        print("[1] \033[38;5;205mParse the File\033[0m")
         print("[2] Frequency Tables")
         print("[3] Most Common IP/Port")
-        print("[4] HTTP GET Request Data")
-        print("[5] All HTTP Requests and Responses")
+        print("[4] \033[38;5;202mHTTP GET Request Data\033[0m")
+        print("[5] \033[38;5;221mAll HTTP Requests and Responses\033[0m")
         print("[8] Reset the Program for New File")
         print("[0] Exit")
         print("----------------------------------")
@@ -89,14 +89,15 @@ def intro():
                 option=int(input("\n\033[38;5;156mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m "))
                 break
             except ValueError:
-                print("Ope! Let's try again, that didn't feel right!")
-        ### MAIN MENU 1 - PARSING ###    
+                print("\n\033[38;5;203mOpe!  What a midwestern thing of me to say...Let's try again, that didn't feel right!\033[0m\n")
+
+### MAIN MENU 1 - PARSING MENU ###    
 
         while option !=8:
             def option1():
 
                 print("----------------------------------")
-                print("\033[38;5;202mPARSE:\033[0m What is it you're looking for in the pcap file?")
+                print("\033[38;5;205mPARSE:\033[0m What is it you're looking for in the pcap file?")
                 print("----------------------------------")
                 print("[1] \033[38;5;212mConversations and IPs\033[0m")
                 print("[2] \033[38;5;99mProtocols\033[0m")
@@ -108,13 +109,13 @@ def intro():
 
                 while True:
                     try:
-                        parseoption=int(input("\n\033[38;5;202mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
+                        parseoption=int(input("\n\033[38;5;205mWhat are you looking for / looking to do? Type just the number to select the option!\033[0m \n")) 
                         break
                     except ValueError:
-                        print("Ope! Let's try again, that didn't feel right!")
+                        print("\n\033[38;5;203mErmahgerd we made a DERP. Shall we try again? That was not a valid option!\033[0m\n")
                         
 
-                ### CONVERSATION (IP AND DEST AND PROTO) MENU ###
+    ### CONVERSATION (IP AND DEST AND PROTO) PARSING MENU (1) ###
 
 
                 if parseoption ==1:
@@ -144,11 +145,11 @@ def intro():
                         print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
                         print("[2] Check All Packets - \033[34mSrc IP\033[0m")
                         print("[3] Check All Packets - \033[33mDst IP\033[0m")
-                        print("[4] Check First 10 Packets - \033[34mSrc IP\033[0m")
-                        print("[5] Check First 10 Packets - \033[33mDst IP\033[0m")
-                        print("[6] Check Last 10 Packets - \033[34mSrc IP\033[0m")
-                        print("[7] Check Last 10 Packets - \033[33mDst IP\033[0m")
-                        print("[8] Back to \033[38;5;202mParse:\033[0m Menu (Previous Menu)")
+                        print("[4] Check First 10 Packets - \033[38;5;51mSrc IP\033[0m")
+                        print("[5] Check First 10 Packets - \033[38;5;228mDst IP\033[0m")
+                        print("[6] Check Last 10 Packets - \033[38;5;51mSrc IP\033[0m")
+                        print("[7] Check Last 10 Packets - \033[38;5;228mDst IP\033[0m")
+                        print("[8] Back to \033[38;5;205mParse:\033[0m Menu (Previous Menu)")
                         print("[9] \033[38;5;156mMain Menu\033[0m")
                         print("[0] Exit")
                         print("----------------------------------")
@@ -158,7 +159,7 @@ def intro():
                                 sdipoption=int(input("\n\033[38;5;212mI do like a good Ipv4 address! Let's dive into the IP addresses. \nWe have both Src and Dst options! What are you looking for?: \n\033[0m\n"))
                                 break
                             except ValueError:
-                                print("Ope! Let's try again, that didn't feel right!")
+                                print("\n\033[38;5;203mThat did not feel right! Shall we try, try again?\033[0m\n")
 
                         if sdipoption ==1:
                             sdip1()
@@ -181,15 +182,17 @@ def intro():
                         elif sdipoption ==0:
                             sdipexit()
                         else:
-                            print(f'\n\033[31mNever fear, we can have another try! Choose wisely...\033[0m')
-                      
+                            print(f'\n\033[38;5;203mNever fear, we can have another try! Choose wisely...\033[0m')
+             
+    ### PROTOCOL PARSING MENU  (2) ###
+
 
                 elif parseoption == 2:
                     os.system("cat " + filename + " | awk '{print $5}' | sort | uniq -c | sort -nr")
                     option1()
 
 
-### SRC PORT PARSING MENU ###
+    ### SRC PORT PARSING MENU  (3) ###
 
 
 
@@ -198,7 +201,7 @@ def intro():
                     option1()
                     
                     
-### DST PORT MENU ###
+    ### DST PORT PARSING MENU (4) ###
 
 
                 elif parseoption ==4:
@@ -211,8 +214,8 @@ def intro():
                     print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
                     os._exit(0)
                 else:
-                    print(f'\n\033[31mOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\033[0m\n')
-                    option1()
+                    print("\n\033[38;5;203mOops! Perhaps it is a Monday, or just a mistake! Did you mean something else?\033[0m\n")
+                    
 
 
 
@@ -277,7 +280,7 @@ def intro():
                 for port, count in portcnt1.most_common():
                     porttablemost.add_row([port, count])
                 print(porttablemost[0])
-                print(f'\n\033[38;5;9mYour most frequent source and destination IP, as well as their frequency are Source:\033[0m\n {srctablemost[0]} \n \033[38;5;9mand Destination:\033[0m \n{dsttablemost[0]} \033[0m\n')
+                print(f'\n\033[38;5;14mYour most frequent source and destination IP, as well as their frequency are Source:\033[0m\n {srctablemost[0]} \n \033[38;5;9mand Destination:\033[0m \n{dsttablemost[0]} \033[0m\n')
                 mainmenu()
 
 
@@ -301,7 +304,7 @@ def intro():
                         grepoption=int(input("\n\033[38;5;202mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
                         break
                     except ValueError:
-                        print("Ope! Let's try again, that didn't feel right!")
+                        print("\n\033[38;5;203mOpe! Let's try again, that didn't feel right!\033[0m\n")
 
 
                 if grepoption ==1:
@@ -336,12 +339,13 @@ def intro():
                 elif grepoption ==9:
                     mainmenu()
                 elif grepoption==0:
-                    print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                    print("\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting")
                     os._exit(0) 
                 else:
-                    print(f'\n\033[31mErmahgerd! Let us try, try again!\033[0m')
+                    print("\n\033[38;5;203mErmahgerd! Let us try, try again!\033[0m")
                                   
-                                       
+
+### MAIN MENU 6 - HTTP REQUEST/RESPONSE INFO ###  
 
             def option5():
                 packets2=pcap
@@ -359,7 +363,7 @@ def intro():
                         grepoption2=int(input("\n\033[38;5;221mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
                         break
                     except ValueError:
-                        print("Ope! Let's try again, that didn't feel right!")
+                        print("\n\033[38;5;203mOpe! Let's try again, that didn't feel right!\033[0m\n")
 
 
                 if grepoption2 ==1:
@@ -383,14 +387,14 @@ def intro():
                 elif grepoption2 ==9:
                     mainmenu()
                 elif grepoption2==0:
-                    print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                    print("\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting")
                     os._exit(0) 
                 else:
-                    print(f'\n\033[31mErmahgerd we made a DERP! Let us try, try again!\033[0m')
+                    print("\n\033[38;5;203mErmahgerd we made a DERP! Let us try, try again!\033[0m\n')
 
 
             def exit():
-                print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m')
+                print("\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m")
                 os._exit(0)
 
             if option ==1:
@@ -406,7 +410,7 @@ def intro():
             elif option ==0:
                 exit()
             else:
-                print("\033[31mInvalid choice, try again.\033[0m")
+                print("\n\033[38;5;203mInvalid choice, try again.\033[0m")
                 mainmenu()
 
         if option ==8:
@@ -417,7 +421,7 @@ def intro():
             elif response.lower() =='n':
                 mainmenu()
             else:
-                print("\n\033[31mOh schucks. It looks like that wasn't a valid option! Let us start again!\033[0m")
+                print("\n\033[38;5;203mOh schucks. It looks like that wasn't a valid option! Let us start again!\033[0m\n")
                 mainmenu()
 
 
