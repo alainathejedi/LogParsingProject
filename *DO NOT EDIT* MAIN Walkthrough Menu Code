@@ -19,9 +19,9 @@ def intro():
 
     print('''  
                       /\____/\           
-                     (o('/\\')o)  o o o O "I am the Log 
-                      ( \__/ )            Llama! Time to
-                       (    )              get PARSED!"
+                     (\033[38;5;156mo\033[0m('/\\')\033[38;5;156mo\033[0m)  o o o O \033[38;5;156m"I a>
+                      ( \__/ )            \033[38;5;156mLlama! Time to\033[0m
+                       (    )              \033[38;5;156mget PARSED!"\033[0m
                        (    )       /\\
                        (    )______/  \\
                        (              )
