@@ -67,7 +67,7 @@ def intro():
     coloredtext= colored(asciitext, 'cyan', attrs=["bold"])
     print(coloredtext)
     print(f'\033[38;5;156mLog Lollygagging with Almir, Misheon, and Alaina the Jedi\033[0m\n')
-    print(f'\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a series of menus to pull out important information you may need from your pcap file. You can look for frequencies, or search for strings in the data itself. Pretty cool, eh? Below is the main menu of items. You can look for certain fields in the file via parse, check frequencies, or look at the HTTP data left beghind!.\033[0m')
+    print(f'\033[38;5;156mHi there! Welcome to Log Lollygagging, also called Project LLAMA. This program will provide key information, and also allow you to parse through log files from pcaps. The program will walk you through a series of menus to pull out important information you may need from your pcap file. You can look for frequencies, or search for strings in the data itself. Pretty cool, eh? Below is the main menu of items. You can look for certain fields in the file via parse, check frequencies, or look at the HTTP data left behind!.\033[0m')
 
 ### MAIN MENU FUNCTION ###
 
