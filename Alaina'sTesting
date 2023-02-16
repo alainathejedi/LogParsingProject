@@ -183,9 +183,9 @@ def intro():
                     sppackets=pcap
 
                     print("----------------------------------")
-                    print("\033[38;5;202mSrc Port:\033[0m What is it you're looking for in the pcap file?")
+                    print("\033[34mSrc Port:\033[0m What is it you're looking for in the pcap file?")
                     print("----------------------------------")
-                    print("[1] Get Port Counts")
+                    print("[1] Get Src Port Counts")
                     print("[2] Look for port [input]")
                     print("[9] Main Menu")
                     print("[0] Exit")
@@ -193,7 +193,7 @@ def intro():
 
                     while True:
                         try:
-                            spgrep=int(input("\n\033[38;5;202mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
+                            spgrep=int(input("\n\033[34mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
                             break
                         except ValueError:
                             print("Ope! Let's try again, that didn't feel right!")
@@ -204,7 +204,7 @@ def intro():
                        
                         elif spgrep ==2:
                             packets3 = pcap
-                            spoption=input("\nWhat Src Port do you want to search for? It will print the packet data for you!")
+                            spoption=input("\n\033[34mWhat Src Port do you want to search for? It will print the packet data for you!\033[0m")
                             for packet in packets3:
                                 if TCP in packet:
                                     if packet[TCP].sport == spoption:
