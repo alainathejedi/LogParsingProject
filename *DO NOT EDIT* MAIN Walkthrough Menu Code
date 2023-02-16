@@ -280,7 +280,7 @@ def intro():
                 for port, count in portcnt1.most_common():
                     porttablemost.add_row([port, count])
                 print(porttablemost[0])
-                print(f'\n\033[38;5;14mYour most frequent source and destination IP, as well as their frequency are Source:\033[0m\n {srctablemost[0]} \n \033[38;5;9mand Destination:\033[0m \n{dsttablemost[0]} \033[0m\n')
+                print(f'\n\033[38;5;14mYour most frequent source and destination IP, as well as their frequency are Source:\033[0m\n {srctablemost[0]} \n \033[38;5;14mand Destination:\033[0m \n{dsttablemost[0]} \033[0m\n')
                 mainmenu()
 
 
@@ -345,7 +345,7 @@ def intro():
                     print("\n\033[38;5;203mErmahgerd! Let us try, try again!\033[0m")
                                   
 
-### MAIN MENU 6 - HTTP REQUEST/RESPONSE INFO ###  
+### MAIN MENU 5 - HTTP REQUEST/RESPONSE INFO ###  
 
             def option5():
                 packets2=pcap
@@ -390,7 +390,7 @@ def intro():
                     print("\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting")
                     os._exit(0) 
                 else:
-                    print("\n\033[38;5;203mErmahgerd we made a DERP! Let us try, try again!\033[0m\n')
+                    print("\n\033[38;5;203mErmahgerd we made a DERP! Let us try, try again!\033[0m\n")
 
 
             def exit():
