@@ -134,7 +134,7 @@ def intro():
                         print("[5] Check First 10 Packets - \033[33mDst IP\033[0m")
                         print("[6] Check Last 10 Packets - \033[34mSrc IP\033[0m")
                         print("[7] Check Last 10 Packets - \033[33mDst IP\033[0m")
-                        print("[8] Back to 033[38;5;202mParse:\033[0m Menu (Previous Menu)")
+                        print("[8] Back to \033[38;5;202mParse:\033[0m Menu (Previous Menu)")
                         print("[9] \033[38;5;156mMain Menu\033[0m")
                         print("[0] Exit")
                         print("----------------------------------")
@@ -180,8 +180,49 @@ def intro():
 
 
                 elif parseoption == 3:
-                    os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
-                    option1()
+                    sppackets=pcap
+
+                    print("----------------------------------")
+                    print("\033[38;5;202mSrc Port:\033[0m What is it you're looking for in the pcap file?")
+                    print("----------------------------------")
+                    print("[1] Get Port Counts")
+                    print("[2] Look for port [input]")
+                    print("[9] Main Menu")
+                    print("[0] Exit")
+                    print("----------------------------------")
+
+                    while True:
+                        try:
+                            spgrep=int(input("\n\033[38;5;202mWhat would you like to do? You can manually search through the output, or look for strings in the file itself.\033[0m\n"))
+                            break
+                        except ValueError:
+                            print("Ope! Let's try again, that didn't feel right!")
+
+
+                        if spgrep ==1:
+                            os.system("cat " + filename + " | awk '{print $6}' | sort | uniq -c | sort -nr")
+                       
+                        elif spgrep ==2:
+                            packets3 = pcap
+                            spoption=input("\nWhat Src Port do you want to search for? It will print the packet data for you!")
+                            for packet in packets3:
+                                if TCP in packet:
+                                    if packet[TCP].sport == spoption:
+                                        print(packet)
+
+                        elif grepoption2 ==9:
+                            mainmenu()
+                        elif grepoption2==0:
+                            print(f'\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting')
+                            os._exit(0) 
+                        else:
+                            print(f'\n\033[31mErmahgerd we made a DERP! Let us try, try again!\033[0m')
+
+
+                                
+                                
+                                
+                    
                     
                     
 ### DST PORT MENU ###
