@@ -82,7 +82,7 @@ def intro():
             def option1():
 
                 print("----------------------------------")
-                print("\033[38;5;202mPARSE:\033[0m What is it you're looking for in the pcap file? \nNote that the format of fields is:\n[Packet Numbers] [Time] [Src IP] [Dst IP] [Protocol] [Src Ports] [Dst Ports] [Info]")
+                print("\033[38;5;202mPARSE:\033[0m What is it you're looking for in the pcap file?")
                 print("----------------------------------")
                 print("[1] \033[38;5;212mConversations and IPs\033[0m")
                 print("[2] \033[38;5;99mProtocols\033[0m")
