@@ -390,13 +390,17 @@ def intro():
 
             def option6():
                 packets4 = pcap
-                matching = input("\n\033[38;5;212mWhat are you looking for? You can type an IP, port, protocol, or packet data! Try it out, friend :) \033[0m\n")
+                matching = input("\n\033[38;5;212mWhat are you looking for? You can type an IP, port, >
                 for packet in packets4:
+                    payload4 = None
+                    if Raw in packet:
+                        payload4 = packet[Raw].load.decode("utf-8", "ignore")
                     for layer in packet.layers():
                         for field in layer.fields_desc:
                             if matching.lower() in str(packet.getfieldval(field.name)).lower():
                                 print(packet.summary())
-                                print(packet.getlayer(TCP))
+                                if payload4:
+                                    print(payload4)
                                 print("\033[38;5;212m-----------------------------------------\033[0m")
                                 break
 
