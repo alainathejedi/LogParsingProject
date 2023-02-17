@@ -396,7 +396,7 @@ def intro():
                         for field in layer.fields_desc:
                             if matching.lower() in str(packet.getfieldval(field.name)).lower():
                                 print(packet.summary())
-                                print(packet[Raw].load.decode("utf-8", "ignore"))
+                                print(packet.getlayer(TCP))
                                 print("\033[38;5;212m-----------------------------------------\033[0m")
                                 break
 
