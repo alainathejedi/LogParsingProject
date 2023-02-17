@@ -80,6 +80,7 @@ def intro():
         print("[3] Most Common IP/Port")
         print("[4] HTTP GET Request Data")
         print("[5] All HTTP Requests and Responses")
+        print("[6] The \"Giant Grep\" - Search for Input in all Packets")
         print("[8] Reset the Program for New Pcap")
         print("[0] Exit")
         print("----------------------------------")
@@ -120,19 +121,17 @@ def intro():
 
                 if parseoption ==1:
                     def sdip1():
-                        os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol\"}' | sort -n")
+                        os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol | \" $6 \" | \" $7}' | sort -n")
                     def sdip2():
                         os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
                     def sdip3():
                         os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
                     def sdip4():
-                        os.system("head " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+                        filenamehead = filename
+                        os.system("head " + filenamehead + " | awk '{print $3 \" > \" $4}'")
                     def sdip5():
-                        os.system("head " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
-                    def sdip6():
-                        os.system("tail " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
-                    def sdip7():
-                        os.system("tail " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+                        filenametail = filename
+                        os.system("tail " + filenametail + " | awk '{print $3 \" > \" $4}'")
                     def sdip9():
                         mainmenu()
                     def sdipexit():
@@ -143,12 +142,10 @@ def intro():
                         print("\033[38;5;212mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. Select an option, with the number, and type it below: \033[0m")
                         print("----------------------------------")
                         print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
-                        print("[2] Check All Packets - \033[34mSrc IP\033[0m")
-                        print("[3] Check All Packets - \033[33mDst IP\033[0m")
-                        print("[4] Check First 10 Packets - \033[38;5;51mSrc IP\033[0m")
-                        print("[5] Check First 10 Packets - \033[38;5;228mDst IP\033[0m")
-                        print("[6] Check Last 10 Packets - \033[38;5;51mSrc IP\033[0m")
-                        print("[7] Check Last 10 Packets - \033[38;5;228mDst IP\033[0m")
+                        print("[2] Check All Packets - \033[38;5;51mSrc IP\033[0m")
+                        print("[3] Check All Packets - \033[38;5;228mDst IP\033[0m")
+                        print("[4] Check First 10 Packets - \033[38;5;51mSrc IP\033[0m > \033[38;5;228mDst IP\033[0m")
+                        print("[5] Check Last 10 Packets - \033[38;5;51mSrc IP\033[0m > \033[38;5;228mDst IP\033[0m")
                         print("[8] Back to \033[38;5;205mParse:\033[0m Menu (Previous Menu)")
                         print("[9] \033[38;5;156mMain Menu\033[0m")
                         print("[0] Exit")
@@ -171,10 +168,6 @@ def intro():
                             sdip4()
                         elif sdipoption ==5:
                             sdip5()
-                        elif sdipoption ==6:
-                            sdip6()
-                        elif sdipoption ==7:
-                            sdip7()
                         elif sdipoption ==9:
                             sdip9()
                         elif sdipoption ==8:
@@ -393,6 +386,20 @@ def intro():
                     print("\n\033[38;5;203mErmahgerd we made a DERP! Let us try, try again!\033[0m\n")
 
 
+### MAIN MENU 6 - SEARCH THROUGH ALL PACKETS FOR INPUT ###
+
+            def option6():
+                packets4 = pcap
+                matching = input("\n\033[38;5;212mWhat are you looking for? You can type an IP, port, protocol, or packet data! Try it out, friend :) \033[0m\n")
+                for packet in packets4:
+                    for layer in packet.layers():
+                        for field in layer.fields_desc:
+                            if matching.lower() in str(packet.getfieldval(field.name)).lower():
+                                print(packet.summary())
+                                print(packet.getlayer(TCP))
+                                print("\033[38;5;212m-----------------------------------------\033[0m")
+                                break
+
             def exit():
                 print("\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m")
                 os._exit(0)
@@ -407,6 +414,9 @@ def intro():
                 option4()
             elif option ==5:
                 option5()
+            elif option ==6:
+                option6()
+                mainmenu()
             elif option ==0:
                 exit()
             else:
