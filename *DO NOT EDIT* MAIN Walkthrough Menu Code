@@ -390,7 +390,7 @@ def intro():
 
             def option6():
                 packets4 = pcap
-                matching = input("\n\033[38;5;212mWhat are you looking for? You can type an IP, port, >
+                matching = input("\n\033[38;5;212mWhat are you looking for? You can type an IP, port, protocol, file names, UNION, etc! Play around if you like, friend :) \033[0m\n" )
                 for packet in packets4:
                     payload4 = None
                     if Raw in packet:
