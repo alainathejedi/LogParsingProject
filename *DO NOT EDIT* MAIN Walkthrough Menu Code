@@ -1,7 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/python3              
 
 ### You'll want to include your own path for python3 ###
-
 import os
 from scapy.all import *
 from prettytable import PrettyTable
@@ -123,18 +122,104 @@ def intro():
 
 
                 if parseoption ==1:
+
                     def sdip1():
-                        os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol | \" $6 \" | \" $7}' | sort -n")
+                        pcapsdip = pcap
+                        for packet in pcapsdip:
+                          if IP in packet:
+                            src_ip = packet[IP].src
+                            dst_ip = packet[IP].dst
+                            if ARP in packet:
+                                src_mac = packet[ARP].hwsrc
+                                dst_mac = packet[ARP].hwdst
+                            elif Ether in packet:
+                                src_mac = packet[Ether].src
+                                dst_mac = packet[Ether].dst
+                            print(f"Source IP: {src_ip} | Source MAC: {src_mac} -> Destination IP: {dst_ip} | Destination MAC: {dst_mac}")                        
+
+#                            os.system("cat " + filename + " | awk '{print $5 \" is the protocol | \"")
                     def sdip2():
-                        os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
+                        def count_src_ips(packets):
+                            src_ips = {}
+                            for packet in packets:
+                                if IP in packet:
+                                    src_ip = packet[IP].src
+                                    if ARP in packet:
+                                        src_mac = packet[ARP].hwsrc
+                                    elif Ether in packet:
+                                        src_mac = packet[Ether].src
+                                    if src_ip in src_ips:
+                                        src_ips[src_ip] += 1
+                                    else:
+                                        src_ips[src_ip] = 1
+                            for src_ip, count in src_ips.items():
+                                print(f"Source IP: {src_ip} | MAC Address: {src_mac} | Count: {count}")
+
+                        pcapsdip = pcap
+                        count_src_ips(pcapsdip)
+                    
+                        #os.system("cat " + filename + " | awk '{print $3}' | sort | uniq -c | sort -nr")
                     def sdip3():
-                        os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
+                        def count_dst_ips(packets):
+                            dst_ips = {}
+                            for packet in packets:
+                                if IP in packet:
+                                    dst_ip = packet[IP].dst
+                                    if ARP in packet:
+                                        dst_mac = packet[ARP].hwdst
+                                    elif Ether in packet:
+                                        dst_mac = packet[Ether].dst
+                                    if dst_ip in dst_ips:
+                                        dst_ips[dst_ip] += 1
+                                    else:
+                                        dst_ips[dst_ip] = 1
+                            for dst_ip, count in dst_ips.items():
+                                print(f"Destination IP: {dst_ip}  | MAC Address: {dst_mac} | Count: {count}")
+
+                        pcapsdip = pcap
+                        count_dst_ips(pcapsdip)
+
+                        #os.system("cat " + filename + " | awk '{print $4}' | sort | uniq -c | sort -nr")
                     def sdip4():
-                        filenamehead = filename
-                        os.system("head " + filenamehead + " | awk '{print $3 \" > \" $4}'")
+                         pcapsdip = pcap
+                         count = 0
+                         for packet in pcapsdip:
+                             if IP in packet:
+                                 src_ip = packet[IP].src
+                                 dst_ip = packet[IP].dst
+                                 if ARP in packet:
+                                     src_mac = packet[ARP].hwsrc
+                                     dst_mac = packet[ARP].hwdst
+                                 elif Ether in packet:
+                                     src_mac = packet[Ether].src
+                                     dst_mac = packet[Ether].dst
+                                 print(f"Source IP: {src_ip} | Source MAC: {src_mac} -> Destination IP: {dst_ip} | Destination MAC: {dst_mac}")
+                                 count += 1
+                                 if count == 10:
+                                     break
+ 
+
+ #                       filenamehead = filename
+#                        os.system("head " + filenamehead + " | awk '{print $3 \" > \" $4}'")
                     def sdip5():
-                        filenametail = filename
-                        os.system("tail " + filenametail + " | awk '{print $3 \" > \" $4}'")
+                        pcapsdip1 = pcap
+                        packets = list(pcapsdip1)
+                        for packet in reversed(packets[-10:]):
+                            if IP in packet:
+                                src_ip = packet[IP].src
+                                dst_ip = packet[IP].dst
+                                if ARP in packet:
+                                    src_mac = packet[ARP].hwsrc
+                                    dst_mac = packet[ARP].hwdst
+                                elif Ether in packet:
+                                    src_mac = packet[Ether].src
+                                    dst_mac = packet[Ether].dst
+                                print(f"Source IP: {src_ip} | Source MAC: {src_mac} -> Destination IP: {dst_ip} | Destination MAC: {dst_mac}")
+                    def sdip6():
+                        filenamesdip = filename
+                        os.system("cat " + filenamesdip + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol | \" $6 \" | \" $7}' | sort -n")
+
+ #                       os.system("tail " + filenametail + " | awk '{print $3 \" > \" $4}'")
                     def sdip9():
                         mainmenu()
                     def sdipexit():
@@ -144,11 +229,12 @@ def intro():
                         print("----------------------------------")
                         print("\033[38;5;212mIP MENU: Here, you can parse for the Src IP and Dst IP from the Log file. Select an option, with the number, and type it below: \033[0m")
                         print("----------------------------------")
-                        print("[1] Check Conversations (Packet | Time | Src | Dst | Protocol)")
-                        print("[2] Check All Packets - \033[38;5;51mSrc IP\033[0m")
-                        print("[3] Check All Packets - \033[38;5;228mDst IP\033[0m")
+                        print("[1] Check Conversations (Src IP | Src MAC | Dst IP | Dst MAC)")
+                        print("[2] Check All Packets - \033[38;5;51mSrc IP\033[0m | Count")
+                        print("[3] Check All Packets - \033[38;5;228mDst IP\033[0m | Count")
                         print("[4] Check First 10 Packets - \033[38;5;51mSrc IP\033[0m > \033[38;5;228mDst IP\033[0m")
                         print("[5] Check Last 10 Packets - \033[38;5;51mSrc IP\033[0m > \033[38;5;228mDst IP\033[0m")
+                        print("[6] Check Conversation with Procols (Packet | Time | IPs | Protocol | Ports (Src | Dst))")
                         print("[8] Back to \033[38;5;205mParse:\033[0m Menu (Previous Menu)")
                         print("[9] \033[38;5;156mMain Menu\033[0m")
                         print("[0] Exit")
@@ -171,6 +257,8 @@ def intro():
                             sdip4()
                         elif sdipoption ==5:
                             sdip5()
+                        elif sdipoption ==6:
+                            sdip6()
                         elif sdipoption ==9:
                             sdip9()
                         elif sdipoption ==8:
