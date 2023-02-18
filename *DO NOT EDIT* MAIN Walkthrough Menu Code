@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.                    ### You'll want to include your own path for python3 ###
 import os
 from scapy.all import *
 from prettytable import PrettyTable
@@ -404,9 +404,15 @@ def intro():
                                 print("\033[38;5;212m-----------------------------------------\033[0m")
                                 break
 
+                                
+### MAIN MENU - EXIT ###
+
             def exit():
                 print("\n\033[38;5;156mAlrighty then! Thanks for visiting Log Lollygagging. We hope it helped! Happy Log Hunting\033[0m")
                 os._exit(0)
+
+                
+### MAIN MENU FINAL PART OF DEF ###
 
             if option ==1:
                 option1()
@@ -426,6 +432,9 @@ def intro():
             else:
                 print("\n\033[38;5;203mInvalid choice, try again.\033[0m")
                 mainmenu()
+
+                
+### MAIN MENU 8 - RESET THE PROGRAM ###
 
         if option ==8:
             response=input("\n\033[38;5;38mWould you like to parse through another pcap file? Type Y for YES and N for NO\033[0m\n")
