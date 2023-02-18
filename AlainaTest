@@ -136,7 +136,8 @@ def intro():
                                 src_mac = packet[Ether].src
                                 dst_mac = packet[Ether].dst
                             print(f"Source IP: {src_ip} | Source MAC: {src_mac} -> Destination IP: {dst_ip} | Destination MAC: {dst_mac}")                        
-                        # os.system("cat " + filename + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol | \" $6 \" | \" $7}' | sort -n")
+
+#                            os.system("cat " + filename + " | awk '{print $5 \" is the protocol | \"")
                     def sdip2():
                         def count_src_ips(packets):
                             src_ips = {}
@@ -214,8 +215,10 @@ def intro():
                                     src_mac = packet[Ether].src
                                     dst_mac = packet[Ether].dst
                                 print(f"Source IP: {src_ip} | Source MAC: {src_mac} -> Destination IP: {dst_ip} | Destination MAC: {dst_mac}")
+                    def sdip6():
+                        filenamesdip = filename
+                        os.system("cat " + filenamesdip + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol | \" $6 \" | \" $7}' | sort -n")
 
-#                        filenametail = filename
  #                       os.system("tail " + filenametail + " | awk '{print $3 \" > \" $4}'")
                     def sdip9():
                         mainmenu()
@@ -231,6 +234,7 @@ def intro():
                         print("[3] Check All Packets - \033[38;5;228mDst IP\033[0m | Count")
                         print("[4] Check First 10 Packets - \033[38;5;51mSrc IP\033[0m > \033[38;5;228mDst IP\033[0m")
                         print("[5] Check Last 10 Packets - \033[38;5;51mSrc IP\033[0m > \033[38;5;228mDst IP\033[0m")
+                        print("[6] Check Conversation with Procols (Packet | Time | IPs | Protocol | Ports (Src | Dst))")
                         print("[8] Back to \033[38;5;205mParse:\033[0m Menu (Previous Menu)")
                         print("[9] \033[38;5;156mMain Menu\033[0m")
                         print("[0] Exit")
@@ -253,6 +257,8 @@ def intro():
                             sdip4()
                         elif sdipoption ==5:
                             sdip5()
+                        elif sdipoption ==6:
+                            sdip6()
                         elif sdipoption ==9:
                             sdip9()
                         elif sdipoption ==8:
