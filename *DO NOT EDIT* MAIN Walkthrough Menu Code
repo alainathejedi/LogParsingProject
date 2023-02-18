@@ -1,4 +1,7 @@
-#!/usr/bin/python3.                    ### You'll want to include your own path for python3 ###
+#!/usr/bin/python3
+
+### You'll want to include your own path for python3 ###
+
 import os
 from scapy.all import *
 from prettytable import PrettyTable
