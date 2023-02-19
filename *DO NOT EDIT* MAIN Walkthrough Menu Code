@@ -125,6 +125,7 @@ def intro():
 
                     def sdip1():
                         pcapsdip = pcap
+                        count = 0
                         for packet in pcapsdip:
                           if IP in packet:
                             src_ip = packet[IP].src
@@ -135,7 +136,8 @@ def intro():
                             elif Ether in packet:
                                 src_mac = packet[Ether].src
                                 dst_mac = packet[Ether].dst
-                            print(f"Source IP: {src_ip} | Source MAC: {src_mac} -> Destination IP: {dst_ip} | Destination MAC: {dst_mac}")                        
+                            count += 1
+                            print(f" \033[38;5;245mPacket:\033[0m {count} | \033[38;5;51mSource IP:\033[0m {src_ip} | \033[38;5;51mSource MAC:\033[0m {src_mac} -> \033[38;5;228mDestination IP:\033[0m {dst_ip} | \033[38;5;228mDestination MAC:\033[0m {dst_mac}")                        
 
 #                            os.system("cat " + filename + " | awk '{print $5 \" is the protocol | \"")
                     def sdip2():
