@@ -122,22 +122,36 @@ def intro():
 
 
                 if parseoption ==1:
-
                     def sdip1():
                         pcapsdip = pcap
                         count = 0
                         for packet in pcapsdip:
-                          if IP in packet:
-                            src_ip = packet[IP].src
-                            dst_ip = packet[IP].dst
-                            if ARP in packet:
-                                src_mac = packet[ARP].hwsrc
-                                dst_mac = packet[ARP].hwdst
-                            elif Ether in packet:
-                                src_mac = packet[Ether].src
-                                dst_mac = packet[Ether].dst
-                            count += 1
-                            print(f" \033[38;5;245mPacket:\033[0m {count} | \033[38;5;51mSource IP:\033[0m {src_ip} | \033[38;5;51mSource MAC:\033[0m {src_mac} -> \033[38;5;228mDestination IP:\033[0m {dst_ip} | \033[38;5;228mDestination MAC:\033[0m {dst_mac}")                        
+                            if IP in packet:
+                                src_ip = packet[IP].src
+                                dst_ip = packet[IP].dst
+                                if ARP in packet:
+                                    src_mac = packet[ARP].hwsrc
+                                    dst_mac = packet[ARP].hwdst
+                                elif Ether in packet:
+                                    src_mac = packet[Ether].src
+                                    dst_mac = packet[Ether].dst
+                                count += 1
+                                print(f"\033[38;5;245mPacket:\033[0m {count} | \033[38;5;51mSource IP:\033[0m {src_ip} | \033[38;5;51mSource MAC:\033[0m {src_mac} -> \033[38;5;228mDestination IP:\033[0m {dst_ip} | \033[38;5;228mDestination MAC:\033[0m {dst_mac}")
+
+                        while True:
+                            jump = input("\nDo you want to jump to a specific packet? (y/n)\n ")
+                            if jump.lower() == 'n':
+                                break
+                            elif jump.lower() == 'y':
+                                packet_num = int(input("\nEnter packet number to jump to: \n"))
+                                if packet_num <= count:
+                                    pcapsdip[packet_num-1].show()
+                                    break
+                                else:
+                                    print(f"Invalid packet number. Please enter a number between 1 and {count}.")
+                            else:
+                                print("Invalid input. Please enter 'y' or 'n'.")
+
 
 #                            os.system("cat " + filename + " | awk '{print $5 \" is the protocol | \"")
                     def sdip2():
@@ -155,7 +169,7 @@ def intro():
                                     else:
                                         src_ips[src_ip] = 1
                             for src_ip, count in src_ips.items():
-                                print(f"Source IP: {src_ip} | MAC Address: {src_mac} | Count: {count}")
+                                print(f"\033[38;5;51mSource IP:\033[0m {src_ip} | MAC Address: {src_mac} | Count: {count}")
 
                         pcapsdip = pcap
                         count_src_ips(pcapsdip)
@@ -176,7 +190,7 @@ def intro():
                                     else:
                                         dst_ips[dst_ip] = 1
                             for dst_ip, count in dst_ips.items():
-                                print(f"Destination IP: {dst_ip}  | MAC Address: {dst_mac} | Count: {count}")
+                                print(f"\033[38;5;228mDestination IP:\033[0m {dst_ip}  | MAC Address: {dst_mac} | Count: {count}")
 
                         pcapsdip = pcap
                         count_dst_ips(pcapsdip)
@@ -195,7 +209,7 @@ def intro():
                                  elif Ether in packet:
                                      src_mac = packet[Ether].src
                                      dst_mac = packet[Ether].dst
-                                 print(f"Source IP: {src_ip} | Source MAC: {src_mac} -> Destination IP: {dst_ip} | Destination MAC: {dst_mac}")
+                                 print(f"\033[38;5;51mSource IP:\033[0m {src_ip} | \033[38;5;51mSource MAC:\033[0m {src_mac} -> \033[38;5;228mDestination IP:\033[0m {dst_ip} | \033[38;5;228mDestination MAC:\033[0m {dst_mac}")
                                  count += 1
                                  if count == 10:
                                      break
@@ -216,7 +230,7 @@ def intro():
                                 elif Ether in packet:
                                     src_mac = packet[Ether].src
                                     dst_mac = packet[Ether].dst
-                                print(f"Source IP: {src_ip} | Source MAC: {src_mac} -> Destination IP: {dst_ip} | Destination MAC: {dst_mac}")
+                                print(f"\033[38;5;51mSource IP:\033[0m {src_ip} | \033[38;5;51mSource MAC: \033[0m{src_mac} -> \033[38;5;228mDestination IP:\033[0m {dst_ip} | \033[38;5;228mDestination MAC:\033[0m {dst_mac}")
                     def sdip6():
                         filenamesdip = filename
                         os.system("cat " + filenamesdip + " | awk '{print $1 \" | After \" $2 \"s | \" $3 \" < SRC  |  DST > \"  $4 \" | \" $5 \" is the protocol | \" $6 \" | \" $7}' | sort -n")
