@@ -547,7 +547,6 @@ def intro():
             response=input("\n\033[38;5;38mWould you like to parse through another pcap file? Type Y for YES and N for NO\033[0m\n")
             if response.lower() =='y':
                 intro()
-                mainmenu()
             elif response.lower() =='n':
                 mainmenu()
             else:
