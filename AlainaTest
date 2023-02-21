@@ -7,6 +7,8 @@ from prettytable import PrettyTable
 from collections import Counter
 import pyfiglet 
 from termcolor import colored
+import pyshark
+import re
 
 
 ### Welcome! This is a walkthrough log parsing code. You will be able to load a pcap file and then check SRC and DST IP, Ports, Protocols, and HTTP information.
@@ -83,7 +85,7 @@ def intro():
         print("[4] HTTP GET Request Data")
         print("[5] All HTTP Requests and Responses")
         print("[6] The \"Giant Grep\" - Search for Input in all Packets")
-        print("[7] Pull Images (names of files, will save a copy too)")
+        print("[7] Look for Images")
         print("[8] Reset the Program for New Pcap")
         print("[0] Exit")
         print("----------------------------------")
@@ -512,31 +514,17 @@ def intro():
                                 print("\033[38;5;212m-----------------------------------------\033[0m")
                                 break
 
-                                
             def option7():
-                pcapimages = pcap
+                image_regex = re.compile(r'\.jpg|\.jpeg|\.png|\.gif|\.bmp')
+                cap = pyshark.FileCapture(pcap)
+                for packet in cap:
+                    try:
+                        raw_payload = bytes.fromhex(packet.tcp.payload.replace(':', ''))
+                    except AttributeError:
+                        continue
 
-                # Loop through each packet in the PCAP file
-                for packet in pcap:
-                    # Check if the packet contains an image (JPEG, PNG, or GIF)
-                    if packet.haslayer(Raw):
-                        # Extract the raw data from the packet
-                        data = packet[Raw].load
-                        # Check if the raw data starts with the image file signature
-                        if data.startswith(b'\xff\xd8\xff\xe0') or data.startswith(b'\x89\x50\x4e\x47') or data.startswith(b'\x47\x49\x46\x38'):
-                            # Generate a unique filename for the image based on the packet's timestamp and the image type
-                            timestamp = packet.time
-                            if data.startswith(b'\xff\xd8\xff\xe0'):
-                                extension = '.jpg'
-                            elif data.startswith(b'\x89\x50\x4e\x47'):
-                                extension = '.png'
-                            elif data.startswith(b'\x47\x49\x46\x38'):
-                                extension = '.gif'
-                            imagefiles = f'image_{timestamp}{extension}'
-                            print(imagefiles)
-                            # Write the image data to a file
-                            with open(imagefiles, 'wb') as f:
-                                f.write(data)
+                    if image_regex.search(raw_payload):
+                        print('Found an image file in packet:', packet.number)
 
                                 
 ### MAIN MENU - EXIT ###
@@ -576,7 +564,6 @@ def intro():
             response=input("\n\033[38;5;38mWould you like to parse through another pcap file? Type Y for YES and N for NO\033[0m\n")
             if response.lower() =='y':
                 intro()
-                mainmenu()
             elif response.lower() =='n':
                 mainmenu()
             else:
